@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes - CAS-FEE Project 1</title>
+
+    <link rel="stylesheet" href="general.css">
+    <!--@todo: jQuery-->
+    <!--@todo: reset.css oder normalize.css?-->
+</head>
+
+<body>
+<header>
+    <button>Create new Note</button>
+    <select name="" id="selectStyle">
+        <option value="bw" selected>Black&White-Style</option>
+        <option value="bw">Dracula-Style</option>
+    </select>
+</header>
+
+<div>
+    <h1>Sort by</h1>
+    <nav>
+        <button>Finish Date</button>
+        <button>Created Date</button>
+        <button>Importance</button>
+    </nav>
+
+    <h1>Filter</h1>
+    <button>Show Finished</button>
+</div>
+
+<main>
+    <!-- View: By Importance -->
+    <div class="task-item">
+        <input type="checkbox" id="finished_task1">
+        <label for="finished_task1">Finished</label>
+        <select name="" id="selectTask">
+            <option value="dummy1">Dummy-Task1</option>
+            <option value="dummy2" selected>Dummy-Task2</option>
+        </select>
+        <button>Edit</button>
+    </div>
+</main>
+
+<footer>
+    <span><a href="https://github.com/elafari/CAS-FEE_project1">GitHub Repository</a></span>
+    <span class="right">Created by Tony Kammermeier and Rafael Bamert</span>
+    <!--@todo: insert GitHub icon and links to our gitHub-pages-->
+</footer>
+
+<form id="edit-task-item">
+    <div>
+        <label for="title">Title</label>
+        <input type="text" id="title">
+    </div>
+    <div>
+        <label for="description">Beschreibung</label>
+        <input type="text" id="description">
+    </div>
+    <div>
+        <label for="importance">Wichtigkeit</label>
+        <input type="text" id="importance">
+    </div>
+    <div>
+        <label for="due-date">Erledigt bis:</label>
+        <input type="date" id="due-date">
+    </div>
+    <div>
+        <button id="save-button">Speichern</button>
+        <button id="cancel-button">Cancel</button>
+    </div>
+</form>
+
+</body>
+</html>
