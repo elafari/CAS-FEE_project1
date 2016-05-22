@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jquery.post Test</title>
+		
+	</head>
+	<body>
+	
+		<form action="http://localhost:4000/notebook" id="post-form">
+			
+			<input type="radio" name="url" value="http://localhost:4000/notebook" />add new record<br>
+			<input type="radio" name="url" value="http://localhost:4000/notebookUpdate" />update record 4<br>
+			<input type="radio" name="url" value="http://localhost:4000/notebookDelete" />delete record 4<br>
+			<br>
+			<input type="submit" value="POST data">
+			
+		</form>
+
+		<!-- the result will be rendered inside this div -->
+		<div id="result"></div>
+
+		<script src="vendor/jquery-2.2.3.js"></script>
+		<script src="js/customPost.js"></script>
+	</body>
+</html>

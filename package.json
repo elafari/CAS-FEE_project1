@@ -1,0 +1,19 @@
+{
+  "name": "node-simple-rest",
+  "version": "1.0.0",
+  "description": "Simple Rest example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.2",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "fs": "0.0.2",
+    "moment": "^2.13.0",
+    "path": "^0.12.7"
+  }
+}
