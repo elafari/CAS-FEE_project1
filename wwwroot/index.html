@@ -3,44 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Notes - CAS-FEE Project 1</title>
+    <link rel="stylesheet" href="./vendor/normalize.css">
+    <link rel="stylesheet" href="./css/general.css">
 
-    <link rel="stylesheet" href="general.css">
-    <!--@todo: jQuery-->
-    <!--@todo: reset.css oder normalize.css?-->
+    <!-- handlebars template -->
+    <script id="notes-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <li id="note-{{this.id}}">
+            <input type="checkbox" id="finish_note-{{this.id}}">
+            <label for="finish_note-{{this.id}}">Finished</label>
+            <div>
+                <div>{{this.title}}</div>
+                <div>{{this.importance}}</div><!-- @todo: 1 svg, 3 colors-->
+                <div>{{this.description}}</div><!-- @todo: Event-Handler expandDescription -->
+            </div>
+            <button>Edit</button>
+        </li>
+        {{/each}}
+    </script>
 </head>
 
 <body>
 <header>
-    <button>Create new Note</button>
-    <select name="" id="selectStyle">
+    <button id="create">Create new Note</button>
+    <select name="" id="select-theme"><!-- @todo: use handlebars template here)-->
         <option value="bw" selected>Black&White-Style</option>
-        <option value="bw">Dracula-Style</option>
+        <option value="dr">Dracula-Style</option>
     </select>
 </header>
 
 <div>
     <h1>Sort by</h1>
     <nav>
-        <button>Finish Date</button>
-        <button>Created Date</button>
-        <button>Importance</button>
+        <button id="by-finish-date">By finish date</button>
+        <button id="by-created-date">By created date</button>
+        <button id="by-prio">by priority</button>
     </nav>
 
     <h1>Filter</h1>
-    <button>Show Finished</button>
+    <button id="show-finished">Show Finished</button>
 </div>
 
 <main>
-    <!-- View: By Importance -->
-    <div class="task-item">
-        <input type="checkbox" id="finished_task1">
-        <label for="finished_task1">Finished</label>
-        <select name="" id="selectTask">
-            <option value="dummy1">Dummy-Task1</option>
-            <option value="dummy2" selected>Dummy-Task2</option>
-        </select>
-        <button>Edit</button>
-    </div>
+    <ul id="notes"></ul><!-- @todo: Event-Handler setFinished and edit -->
 </main>
 
 <footer>
@@ -59,18 +64,22 @@
         <input type="text" id="description">
     </div>
     <div>
-        <label for="importance">Wichtigkeit</label>
-        <input type="text" id="importance">
+        <label for="prio">Wichtigkeit</label>
+        <input type="text" id="prio"><!-- @todo: Event handler: setPrio (color changes)-->
     </div>
     <div>
         <label for="due-date">Erledigt bis:</label>
         <input type="date" id="due-date">
     </div>
     <div>
-        <button id="save-button">Speichern</button>
-        <button id="cancel-button">Cancel</button>
+        <button id="save">Speichern</button>
+        <button id="cancel">Cancel</button>
     </div>
 </form>
+
+<script src="./vendor/jquery-2.2.3.js"></script>
+<script src="./vendor/handlebars-v4.0.5.js"></script>
+<script src="./js/custom.js"></script>
 
 </body>
 </html>
