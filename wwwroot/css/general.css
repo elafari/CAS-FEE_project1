@@ -1,0 +1,45 @@
+html {
+    font-family: Verdana, sans-serif;
+}
+
+.right {
+    text-align: right;
+}
+
+header select {
+    float: right;
+}
+
+.task-item {
+    margin: 1em;}
+
+.task-item  label {
+    display: inline-block;
+    width: 20% }
+.task-item  select {
+    width: 40%
+}
+.task-item  button {
+    width: 4em;
+    padding: 0.5em;
+}
+
+footer {
+    font-size: 0.8em;
+    background-color: lightgrey;
+    padding: 1em;
+}
+
+footer span {
+    display: inline-block;
+    width: 50%;
+    //border: 1px solid black;
+}
+
+.edit-task-item div label {
+    /*display: inline-block;*/
+    width: 30%;}
+.edit-task-item div input {
+    /*display: inline-block;*/
+    width: 70%;
+}
