@@ -8,8 +8,30 @@ $(document).ready(function () {
 
 			if (status == 'success'){
 				console.log(data);
+				
+				var sortCriteria = "datefinished";
+				var sortOrder = true;
+				var filterCriteria = "datefinished";
+				
+				// sort data
+				var sort_by = function(field, reverse, primer){
+					 var key = function (x) {return primer ? primer(x[field]) : x[field]};
 
-				var items = data.map(function (item) {
+					 return function (a,b) {
+						var A = key(a), B = key(b);
+						return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];                  
+					 }
+				}
+				data.sort(sort_by(sortCriteria,sortOrder,parseInt));
+
+				// filter data
+				var dataFiltered = $.grep(data, function(element, index){
+						return element[filterCriteria] != "";
+						//return element.datefinished != "";
+				});
+				
+				
+				var items = dataFiltered.map(function (item) {
 					
 					var datecreateOut = item.datecreate;
 					datecreateOut = moment(datecreateOut,"YYYYMMDDHHmmss").format("YYYY-MM-DD-HH-mm-ss");
@@ -61,3 +83,6 @@ $(document).ready(function () {
   });	
 	
 });
+
+
+

@@ -11,10 +11,11 @@
 var helper = require("../helper/helper.js");
 
 var ourAppRouter = function(app) {
-	
+	/*
 	app.get("/", function(req, res) {
 		res.send("Welcome to this site!");
 	});
+	*/
 	
 	app.get("/toggleLogInfo", function(req, res) {
 		try {
