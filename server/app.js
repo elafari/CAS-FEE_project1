@@ -23,7 +23,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/',express.static('wwwroot'));
+app.use('/',express.static('../wwwroot'));
 
 // Define routes
 var ourAppRouter = require("./routes/routes.js")(app);
