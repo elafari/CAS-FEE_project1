@@ -10,13 +10,15 @@
     <script id="notes-template" type="text/x-handlebars-template">
         {{#each this}}
         <li id="note-{{this.id}}">
-            <input type="checkbox" id="finish_note-{{this.id}}">
-            <label for="finish_note-{{this.id}}">Finished</label>
-            <div>
-                <div>{{this.title}}</div>
-                <div>{{this.importance}}</div><!-- @todo: 1 svg, 3 colors-->
-                <div>{{this.description}}</div><!-- @todo: Event-Handler expandDescription -->
-            </div>
+            <span>
+                <input type="checkbox" id="finish_note-{{this.id}}">
+                <label for="finish_note-{{this.id}}">Finished</label>
+            </span>
+            <span>
+                <span class="title">{{this.title}}</span>&nbsp;
+                <span class="prio">{{this.prio}}</span><br><!-- @todo: 1 svg, 3 colors-->
+                <span class="desc">{{this.description}}</span><!-- @todo: Event-Handler expandDescription -->
+            </span>
             <button>Edit</button>
         </li>
         {{/each}}
@@ -25,24 +27,29 @@
 
 <body>
 <header>
-    <button id="create">Create new Note</button>
-    <select name="" id="select-theme"><!-- @todo: use handlebars template here)-->
-        <option value="bw" selected>Black&White-Style</option>
-        <option value="dr">Dracula-Style</option>
-    </select>
+    <div>
+        <button id="create">Create new Note</button>
+        <select name="" id="select-theme"><!-- @todo: use handlebars template here)-->
+            <option value="bw" selected>Black&White-Style</option>
+            <option value="dr">Dracula-Style</option>
+        </select>
+        <label for="select-theme">Choose theme:&nbsp;</label>
+    </div>
+    <div>
+        <div>
+            <h1>Sort</h1>
+            <nav>
+                <button id="by-finish-date">By finish date</button>
+                <button id="by-created-date">By created date</button>
+                <button id="by-prio">By priority</button>
+            </nav>
+        </div>
+        <div class=right">
+            <h1 class="right">Filter</h1>
+            <button id="show-finished">Show Finished</button>
+        </div>
+    </div>
 </header>
-
-<div>
-    <h1>Sort by</h1>
-    <nav>
-        <button id="by-finish-date">By finish date</button>
-        <button id="by-created-date">By created date</button>
-        <button id="by-prio">by priority</button>
-    </nav>
-
-    <h1>Filter</h1>
-    <button id="show-finished">Show Finished</button>
-</div>
 
 <main>
     <ul id="notes"></ul><!-- @todo: Event-Handler setFinished and edit -->
@@ -50,10 +57,10 @@
 
 <footer>
     <span><a href="https://github.com/elafari/CAS-FEE_project1">GitHub Repository</a></span>
-    <span class="right">Created by Tony Kammermeier and Rafael Bamert</span>
+ <span class="right">Created by Tony Kammermeier and Rafael Bamert</span>
     <!--@todo: insert GitHub icon and links to our gitHub-pages-->
 </footer>
-
+<!--
 <form id="edit-task-item">
     <div>
         <label for="title">Title</label>
@@ -66,7 +73,7 @@
     <div>
         <label for="prio">Wichtigkeit</label>
         <input type="text" id="prio"><!-- @todo: Event handler: setPrio (color changes)-->
-    </div>
+  <!--  </div>
     <div>
         <label for="due-date">Erledigt bis:</label>
         <input type="date" id="due-date">
@@ -75,7 +82,7 @@
         <button id="save">Speichern</button>
         <button id="cancel">Cancel</button>
     </div>
-</form>
+</form>-->
 
 <script src="./vendor/jquery-2.2.3.js"></script>
 <script src="./vendor/handlebars-v4.0.5.js"></script>

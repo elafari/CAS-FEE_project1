@@ -2,48 +2,113 @@ html {
     font-family: Verdana, sans-serif;
 }
 
-.right {
-    text-align: right;
+body {
+    min-width: 600px; /* @todo: remove when made responsive */
+    width: 80%;
+    margin: 2em auto;
+    background-color: aliceblue;
 }
 
-header select {
+/**
+ * @Section: @todo: checkout @section, insert oocss section
+ */
+header, main, footer {
+    border: 1px solid grey;
+    padding: 1em;
+}
+
+/**
+ * Section: Header
+ */
+header {
+    border-radius: 1em 1em 0 0;
+}
+
+header select, header label {
     float: right;
 }
 
-.task-item {
-    margin: 1em;}
+header > div > div {
+    float: left;
+}
+header > div > div:first-child {
+    width: 70%;
+}
+header > div > div:last-child {
+    width: 30%
+}
 
-.task-item  label {
+h1 {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+#show-finished {
+    float:right;
+}
+
+header:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/**
+ * Section: Content
+ */
+main {
+    border-width: 0 1px;
+}
+
+/* ul */
+#notes {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+li > span {
     display: inline-block;
-    width: 20% }
-.task-item  select {
-    width: 40%
-}
-.task-item  button {
-    width: 4em;
-    padding: 0.5em;
 }
 
+.title {
+
+}
+.prio {
+    font-style: oblique;
+}
+.desc {
+    font-style: italic;
+}
+
+
+/**
+ * Section: footer
+ */
 footer {
-    font-size: 0.8em;
-    background-color: lightgrey;
-    padding: 1em;
+    border-radius: 0 0 1em 1em;
 }
 
 footer span {
     display: inline-block;
     width: 50%;
-    //border: 1px solid black;
+    border: 1px solid black;
 }
-
 
 .edit-task-item {
     display: none;
 }
+
 .edit-task-item div label {
     /*display: inline-block;*/
-    width: 30%;}
+    width: 30%;
+}
+
 .edit-task-item div input {
     /*display: inline-block;*/
     width: 70%;
+}
+
+.right {
+    text-align: right;
 }
