@@ -23,6 +23,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Use static to provide static content
 app.use('/',express.static('../wwwroot'));
 
 // Define routes

@@ -44,12 +44,12 @@ var helper = {
 		var checkOK = false;
 		if (update) {
 			helper.logger(helper.logLevel.info,"--> Update");
-			if (reqBody.noteid && reqBody.title && reqBody.text && reqBody.importance ) {
+			if (reqBody.id && reqBody.title && reqBody.description && reqBody.prio ) {
 				checkOK = true;
 			}
 		} else {
 			helper.logger(helper.logLevel.info,"--> Add: " + reqBody.title);
-			if (reqBody.title && reqBody.text && reqBody.importance ) {
+			if (reqBody.title && reqBody.description && reqBody.prio ) {
 				checkOK = true;
 			}
 		}
@@ -92,23 +92,23 @@ var helper = {
 			var note = {};
 				
 			if (updateFlag == true) {
-				note.noteid = noteAttrib.noteid;
+				note.id = noteAttrib.id;
 			} else {
 				// counter was counted up in addNote
-				note.noteid = helper.noteCounter;
+				note.id = helper.noteCounter;
 			}
 			
 			// note attributes
 			note.guid = helper.createGUID();
-			helper.logger(helper.logLevel.info,"GUID: " + helper.createGUID());
+			helper.logger(helper.logLevel.info,"GUID: " + note.guid);
 			
 			note.title = noteAttrib.title;
-			note.text = noteAttrib.author;
-			note.importance = noteAttrib.importance;
+			note.description = noteAttrib.description;
+			note.prio = noteAttrib.prio;
 			
-			note.datecreate = helper.getFormattedDate();			// = noteAttrib.datecreate;
-			note.datefinished = helper.getFormattedDate();		// = noteAttrib.datefinished;
-			note.datetarget = helper.getFormattedDate();			// = noteAttrib.datetarget;
+			note.dateCreated = helper.getFormattedDate();			// = noteAttrib.datecreate;
+			note.dateFinished = helper.getFormattedDate();		// = noteAttrib.datefinished;
+			note.dueDate = helper.getFormattedDate();			// = noteAttrib.datetarget;
 			//
 	
 			return note;
@@ -143,7 +143,7 @@ var helper = {
   */
 	updateNote : function(noteAttrib) {
 		try {
-			var noteID = noteAttrib.noteid;
+			var noteID = noteAttrib.id;
 			helper.logger(helper.logLevel.info,"Update: noteID=" + noteID);
 			// delete note
 			var entryID = helper.checkNotes(noteID);
@@ -157,7 +157,7 @@ var helper = {
 	
 	/**
   * Get whole noteShelf, or one record of noteShelf.
-  * @param {Number} entryID array record which has to be deleted
+  * @param {Number} entryID array record which has been requested
 	* @return {Object} noteShelf object or one noteSelf record
   */
 	getNoteShelf : function(entryID) {
@@ -237,8 +237,8 @@ var helper = {
 			helper.logger(helper.logLevel.info,"Anzahl notes: " + helper.noteShelf.length);
 			var found = -1;
 			for (var i = 0, counter = helper.noteShelf.length; i < counter; i++) {
-				helper.logger(helper.logLevel.info,"i=" + i + " - noteid=" + helper.noteShelf[i].noteid + " - checkID=" + checkID);
-				if (helper.noteShelf[i].noteid == checkID) {
+				helper.logger(helper.logLevel.info,"i=" + i + " - id=" + helper.noteShelf[i].id + " - checkID=" + checkID);
+				if (helper.noteShelf[i].id == checkID) {
 					helper.logger(helper.logLevel.info,"yes");
 					return i;
 				} else {
@@ -252,15 +252,15 @@ var helper = {
 	},
 
 	/**
-  * Get highest noteid in noteShelf.
+  * Get highest note id in noteShelf.
  	* @return {Number} Note id or -1.
   */		
 	getNoteID : function() {
 		try {
 			var found = -1;
 			for (var i = 0, counter = helper.noteShelf.length; i < counter; i++) {
-				if (helper.noteShelf[i].noteid > found) {
-					found = helper.noteShelf[i].noteid;
+				if (helper.noteShelf[i].id > found) {
+					found = helper.noteShelf[i].id;
 				}
 			}
 			return found;
@@ -286,7 +286,7 @@ var helper = {
   */
 	logFormattedDate : function(entryID) {
 	
-		var testDate = helper.noteShelf[entryID].datecreate;
+		var testDate = helper.noteShelf[entryID].dateCreated;
 		var testDateFormatted = moment(testDate,helper.noteDateFormat).format(helper.noteDateFormatOut01)
 	
 		helper.logger(helper.logLevel.info,"date: " + testDate);

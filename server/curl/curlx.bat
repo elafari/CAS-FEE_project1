@@ -5,7 +5,7 @@ if [%1]==[] goto blank
 set PathCurl="C:\Program Files\curl\bin"
 set Port=4000
 
-%PathCurl%\curl -i -X POST --data "title=R2D2&importance=2&text=Nidu%1&datecreate=20160430123456" http://localhost:%Port%/notebook
+%PathCurl%\curl -i -X POST --data "title=Notiztitel %1&prio=2&description=Notizinhalt %1&dateCreated=20160531135656" http://localhost:%Port%/notebook
 echo.
 goto done
 

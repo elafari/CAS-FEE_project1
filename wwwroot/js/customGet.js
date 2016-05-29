@@ -9,9 +9,9 @@ $(document).ready(function () {
 			if (status == 'success'){
 				console.log(data);
 				
-				var sortCriteria = "datefinished";
+				var sortCriteria = "dateFinished";
 				var sortOrder = true;
-				var filterCriteria = "datefinished";
+				var filterCriteria = "dateFinished";
 				
 				// sort data
 				var sort_by = function(field, reverse, primer){
@@ -27,19 +27,18 @@ $(document).ready(function () {
 				// filter data
 				var dataFiltered = $.grep(data, function(element, index){
 						return element[filterCriteria] != "";
-						//return element.datefinished != "";
 				});
 				
 				
 				var items = dataFiltered.map(function (item) {
 					
-					var datecreateOut = item.datecreate;
-					datecreateOut = moment(datecreateOut,"YYYYMMDDHHmmss").format("YYYY-MM-DD-HH-mm-ss");
-					var datetargetOut = item.datetarget;
-					datetargetOut = moment(datetargetOut,"YYYYMMDDHHmmss").format("dddd-WW");
+					var dateCreatedOut = item.dateCreated;
+					dateCreatedOut = moment(dateCreatedOut,"YYYYMMDDHHmmss").format("YYYY-MM-DD-HH-mm-ss");
+					var dueDateOut = item.dueDate;
+					dueDateOut = moment(dueDateOut,"YYYYMMDDHHmmss").format("dddd-WW");
 					
-					return item.noteid + ' | ' + item.guid + ' | ' + item.title + ' | ' + item.importance  + ' | ' + datecreateOut  + ' | ' + item.datefinished  + ' | ' + datetargetOut;
-					//return item.noteid + ' | ' + item.guid + ' | ' + item.title + ' | ' + item.importance  + ' | ' + item.datecreate  + ' | ' + item.datefinished  + ' | ' + item.datetarget;
+					return item["id"] + ' | ' + item["guid"] + ' | ' + item["title"] + ' | ' + item["description"] + ' | ' + item["prio"]  + ' | ' + dateCreatedOut  + ' | ' + item["dateFinished"]  + ' | ' + dueDateOut;
+					//return item["id"] + ' | ' + item["guid"] + ' | ' + item["title"] + ' | ' + item["description"] + ' | ' + item["prio"]  + ' | ' + item["dateCreated"]  + ' | ' + item["dateFinished"]  + ' | ' + item["dueDate"];
 				});
 
 				showData.empty();
@@ -60,13 +59,13 @@ $(document).ready(function () {
 
     var showData = $('#show-data');
 
-    $.getJSON('http://localhost:4000/notebook?noteid=3', function (data,status) {
+    $.getJSON('http://localhost:4000/notebook?id=3', function (data,status) {
 			
 			if (status == 'success'){
 				console.log(data);
 
 				var items = data.map(function (item) {
-					return item.noteid + ' | ' + item.guid + ' | ' + item.title + ' | ' + item.importance  + ' | ' + item.datecreate  + ' | ' + item.datefinished  + ' | ' + item.datetarget;
+					return item["id"] + ' | ' + item["guid"] + ' | ' + item["title"] + ' | ' + item["description"] + ' | ' + item["prio"]  + ' | ' + item["dateCreated"]  + ' | ' + item["dateFinished"]  + ' | ' + item["dueDate"];
 				});
 
 				showData.empty();

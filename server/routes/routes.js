@@ -11,11 +11,6 @@
 var helper = require("../helper/helper.js");
 
 var ourAppRouter = function(app) {
-	/*
-	app.get("/", function(req, res) {
-		res.send("Welcome to this site!");
-	});
-	*/
 	
 	app.get("/toggleLogInfo", function(req, res) {
 		try {
@@ -60,9 +55,9 @@ var ourAppRouter = function(app) {
 	app.get("/notebook", function(req, res) {
 	
 		try {
-			var checkedID = helper.checkNotes(req.query.noteid);
+			var checkedID = helper.checkNotes(req.query.id);
 			
-			if (!req.query.noteid) {
+			if (!req.query.id) {
 				return res.send({"status": "Fehler", "message": "Keine ID"});
 			} else if (checkedID == -1) {
 				return res.send({"status": "Fehler", "message": "Unbekannte ID"});
@@ -89,9 +84,9 @@ var ourAppRouter = function(app) {
 
 		console.log(req.body);
 		try {
-			var checkedID = helper.checkNotes(req.body.noteid);
+			var checkedID = helper.checkNotes(req.body.id);
 		
-			if (!req.body.noteid) {
+			if (!req.body.id) {
 				helper.logger(helper.logLevel.error,"route get /notebookDelete: Keine ID");
 				return res.send({"status": "Fehler", "message": "Keine ID"});
 			} else if (checkedID == -1) {
