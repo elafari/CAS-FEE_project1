@@ -36,6 +36,10 @@ footer span {
     //border: 1px solid black;
 }
 
+
+.edit-task-item {
+    display: none;
+}
 .edit-task-item div label {
     /*display: inline-block;*/
     width: 30%;}
