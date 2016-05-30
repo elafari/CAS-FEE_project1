@@ -1,49 +1,117 @@
+/**
+ * @section general styles
+ * @todo: implement OOCSS
+ */
 html {
     font-family: Verdana, sans-serif;
 }
 
-.right {
-    text-align: right;
+body {
+    min-width: 600px; /* @todo: remove when made responsive */
+    max-width: 1200px;
+    width: 80%;
+    margin: 2em auto;
+    background-color: aliceblue;
 }
 
-header select {
-    float: right;
-}
-
-.task-item {
-    margin: 1em;}
-
-.task-item  label {
-    display: inline-block;
-    width: 20% }
-.task-item  select {
-    width: 40%
-}
-.task-item  button {
-    width: 4em;
-    padding: 0.5em;
-}
-
-footer {
-    font-size: 0.8em;
-    background-color: lightgrey;
+header, main, footer {
+    border: 1px solid grey;
     padding: 1em;
 }
 
-footer span {
-    display: inline-block;
-    width: 50%;
-    //border: 1px solid black;
+/* @subsection helpers */
+.right {
+    text-align: right;
+}
+.table {
+    display: table;
+}
+.table-row {
+    display: table-row;
+}
+.table-cell {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 
-.edit-task-item {
-    display: none;
+/**
+ * @section header
+ */
+header {
+    border-radius: 1em 1em 0 0;
 }
-.edit-task-item div label {
-    /*display: inline-block;*/
-    width: 30%;}
-.edit-task-item div input {
-    /*display: inline-block;*/
+
+header select, header label {
+    float: right;
+}
+
+header > div > div {
+    float: left;
+}
+header > div > div:first-child {
     width: 70%;
+}
+header > div > div:last-child {
+    width: 30%
+}
+
+h1 {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+#show-finished {
+    float:right;
+}
+
+header:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/**
+ * @section content
+ */
+main {
+    border-width: 0 1px;
+}
+
+#notes {
+    display: table;
+    width: 100%;
+    margin: 0 auto;
+
+}
+#notes > div {
+    display: table-row;
+}
+
+#notes > div > span {
+    display: table-cell;
+    padding: 0.5em;
+    vertical-align: middle;
+}
+
+.title {
+
+}
+.prio {
+    font-weight: bold;
+}
+.desc {
+    font-style: italic;
+}
+
+/**
+ * @section footer
+ */
+footer {
+    border-radius: 0 0 1em 1em;
+    font-size: 0.8rem;
+}
+
+footer .table {
+    width: 100%;
 }
