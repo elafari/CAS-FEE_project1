@@ -127,7 +127,7 @@ var helper = {
   */
 	deleteNote : function(entryID) {
 		try {
-			if (entryID) {
+			if (entryID != -1) {
 				helper.noteShelf.splice(entryID,1);
 				
 				helper.saveNotes();
@@ -157,7 +157,7 @@ var helper = {
 				helper.addNote(noteAttrib,true);
 			}
 		} catch (e) {
-			helper.logger(helper.logLevel.error,"helper deleteNote: " + e);
+			helper.logger(helper.logLevel.error,"helper updateNote: " + e);
 		}
 	},
 	

@@ -58,9 +58,9 @@ var ourAppRouter = function(app) {
 			var checkedID = helper.checkNotes(req.query.id);
 			
 			if (!req.query.id) {
-				return res.send({"status": "Fehler", "message": "Keine ID"});
+				return res.send({"status": "error", "message": "route get /notebook: Keine ID"});
 			} else if (checkedID == -1) {
-				return res.send({"status": "Fehler", "message": "Unbekannte ID"});
+				return res.send({"status": "error", "message": "route get /notebook: Unbekannte ID"});
 			} else {
 				return res.send(helper.getNoteShelf(checkedID));
 			}
@@ -79,28 +79,6 @@ var ourAppRouter = function(app) {
 			helper.logger(helper.logLevel.error,"route get /notebookall: " + e);
 		}
 	});
-
-	app.post("/notebookDelete", function(req, res) {
-
-		console.log(req.body);
-		try {
-			var checkedID = helper.checkNotes(req.body.id);
-		
-			if (!req.body.id) {
-				helper.logger(helper.logLevel.error,"route get /notebookDelete: Keine ID");
-				return res.send({"status": "Fehler", "message": "Keine ID"});
-			} else if (checkedID == -1) {
-				helper.logger(helper.logLevel.error,"route get /notebookDelete: Unbekannte ID");
-				return res.send({"status": "Fehler", "message": "Unbekannte ID"});
-			} else {
-				helper.deleteNote(checkedID);
-				
-				return res.send(helper.getNoteShelf());
-			}
-		} catch(e) {
-			helper.logger(helper.logLevel.error,"route get /notebookDelete: " + e);
-		}
-	});	
 	
 	app.post("/notebook", function(req, res) {
 		try {
@@ -110,29 +88,60 @@ var ourAppRouter = function(app) {
 				return res.send(helper.getNoteShelf());
 	
 			} else {
-				return res.send({"status": "Fehler", "message": "Es fehlt mindestens ein Attribut zur Notiz!"});
+				return res.send({"status": "error", "message": "route post /notebook: Es fehlt mindestens ein Attribut zur Notiz!"});
 			}
 		} catch(e) {
 			helper.logger(helper.logLevel.error,"route post /notebook: " + e);
 		}
 	});
 
+	app.post("/notebookDelete", function(req, res) {
+
+		console.log(req.body);
+		try {
+			
+			if (!req.body.id) {
+				helper.logger(helper.logLevel.error,"route get /notebookDelete: Keine ID");
+				return res.send({"status": "error", "message": "route get /notebookDelete: Keine ID"});
+			} else {
+				var checkedID = helper.checkNotes(req.body.id);
+			}	
+			if (checkedID == -1) {
+				helper.logger(helper.logLevel.error,"route get /notebookDelete: Unbekannte ID");
+				return res.send({"status": "error", "message": "route get /notebookDelete: Unbekannte ID"});
+			} else {
+				helper.deleteNote(checkedID);
+				
+				return res.send(helper.getNoteShelf());
+			}
+		} catch(e) {
+			helper.logger(helper.logLevel.error,"route get /notebookDelete: " + e);
+		}
+	});	
+
 	app.post("/notebookUpdate", function(req, res) {
 		try {
-			var checkedID = helper.checkNotes(req.body.id);
-			if (checkedID != -1) {
+			
+			if (!req.body.id) {
+				helper.logger(helper.logLevel.error,"route get /notebookUpdate: Keine ID");
+				return res.send({"status": "error", "message": "Keine ID"});
+			} else {
+				var checkedID = helper.checkNotes(req.body.id);
+			}	
+			if (checkedID == -1) {
+				helper.logger(helper.logLevel.error,"route get /notebookUpdate: Unbekannte ID");
+				return res.send({"status": "error", "message": "route get /notebookUpdate: Unbekannte ID"});
+			} else {
 				if (helper.checkPostParams(req.body,true)) {
 					helper.updateNote(req.body);
 					
 					return res.send(helper.getNoteShelf());
 
 				} else {
-					return res.send({"status": "Fehler", "message": "Es fehlt mindestens ein Attribut zur Notiz!"});
+					return res.send({"status": "error", "message": "route get /notebookUpdate: Es fehlt mindestens ein Attribut zur Notiz!"});
 				}
-			} else {
-				helper.logger(helper.logLevel.error,"route get /notebookUpdate: Unbekannte ID");
-				return res.send({"status": "Fehler", "message": "Unbekannte ID"});
 			}
+			
 		} catch(e) {
 			helper.logger(helper.logLevel.error,"route post /notebookUpdate: " + e);
 		}

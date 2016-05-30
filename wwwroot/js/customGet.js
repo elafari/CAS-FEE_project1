@@ -1,8 +1,8 @@
 $(document).ready(function () {
 	
   $('#get-data-all').click(function () {
-
-    var showData = $('#show-data');
+    
+		var showData = $('#show-data');
 
     $.getJSON('http://localhost:4000/notebookall', function (data,status) {
 
@@ -11,8 +11,25 @@ $(document).ready(function () {
 				
 
 				// filter
-				var filter = true;
+				
+				var filterType = false;
+				var filterInput = $("input[name='filter']:checked").val();
+				console.log("SortType: " + filterInput);
+				if (filterInput == "true") {
+					filterType = true;
+				} else {
+					filterType = false;
+				}				
+
+				var filterSelect = $("#filterSelect").val();
+				console.log("Filter selection: " + filterSelect)
+
 				var filterCriteria = "dateFinished";
+				if (filterSelect != "") {
+					var filterCriteria = filterSelect;
+				}				
+				
+				var filter = filterType;
 
 				var dataResult = data;
 				if (filter == true) {
@@ -20,13 +37,31 @@ $(document).ready(function () {
 				}
 
 				// sort
+				
+				var sortType = false;
+				var sortInput = $("input[name='sort']:checked").val();
+				console.log("SortType: " + sortInput);
+				if (sortInput == "true") {
+					sortType = true;
+				} else {
+					sortType = false;
+				}
+				
+				var sortSelect = $("#sortSelect").val();
+				console.log("Sort selection: " + sortSelect)
+				
 				var sortCriteria = "dateFinished";
-				var sortOrder = true;
+				if (sortSelect != "") {
+					var sortCriteria = sortSelect;
+				}
+
+				var sortOrder = sortType;
 				var sortType = 1;
 				
 				dataResult = cas.fee.helper.sortArray(dataResult,sortCriteria,sortOrder,sortType);
 
 	
+				// show data
 				var items = dataResult.map(function (item) {
 					
 					var dateCreatedOut = item.dateCreated;
