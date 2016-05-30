@@ -1,24 +1,42 @@
+/**
+ * @section general styles
+ * @todo: implement OOCSS
+ */
 html {
     font-family: Verdana, sans-serif;
 }
 
 body {
     min-width: 600px; /* @todo: remove when made responsive */
+    max-width: 1200px;
     width: 80%;
     margin: 2em auto;
     background-color: aliceblue;
 }
 
-/**
- * @Section: @todo: checkout @section, insert oocss section
- */
 header, main, footer {
     border: 1px solid grey;
     padding: 1em;
 }
 
+/* @subsection helpers */
+.right {
+    text-align: right;
+}
+.table {
+    display: table;
+}
+.table-row {
+    display: table-row;
+}
+.table-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
 /**
- * Section: Header
+ * @section header
  */
 header {
     border-radius: 1em 1em 0 0;
@@ -54,61 +72,46 @@ header:after {
 }
 
 /**
- * Section: Content
+ * @section content
  */
 main {
     border-width: 0 1px;
 }
 
-/* ul */
 #notes {
-    list-style-type: none;
+    display: table;
+    width: 100%;
     margin: 0 auto;
-    padding: 0;
+
+}
+#notes > div {
+    display: table-row;
 }
 
-li > span {
-    display: inline-block;
+#notes > div > span {
+    display: table-cell;
+    padding: 0.5em;
+    vertical-align: middle;
 }
 
 .title {
 
 }
 .prio {
-    font-style: oblique;
+    font-weight: bold;
 }
 .desc {
     font-style: italic;
 }
 
-
 /**
- * Section: footer
+ * @section footer
  */
 footer {
     border-radius: 0 0 1em 1em;
+    font-size: 0.8rem;
 }
 
-footer span {
-    display: inline-block;
-    width: 50%;
-    border: 1px solid black;
-}
-
-.edit-task-item {
-    display: none;
-}
-
-.edit-task-item div label {
-    /*display: inline-block;*/
-    width: 30%;
-}
-
-.edit-task-item div input {
-    /*display: inline-block;*/
-    width: 70%;
-}
-
-.right {
-    text-align: right;
+footer .table {
+    width: 100%;
 }

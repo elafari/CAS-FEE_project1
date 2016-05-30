@@ -1,2 +1,16 @@
+/*
 #DADEC7 as background
 #BB3C13 as button..
+*/
+header {
+    background-color: #DADEC7;
+}
+
+
+#notes > div:hover {
+    background-color: lightgrey;
+}
+
+footer {
+    background-color: #DADEC7;
+}

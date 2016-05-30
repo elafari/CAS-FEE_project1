@@ -1,0 +1,27 @@
+body {
+    background-color: #78BFA4;
+}
+
+header{
+    background-color: #FFE4A0;
+}
+main {
+    background-color: #FFFFFF;
+}
+
+#notes > div:hover {
+    background-color: lightgrey;
+}
+
+footer {
+    background-color: #191919;
+    color: whitesmoke;
+}
+footer a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: #18704E;
+}
