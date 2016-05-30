@@ -13,14 +13,14 @@ $( "#post-form" ).submit(function( event ) {
 	
 	// Test: allways the same object...
 	var noteArray = {
-		"id" : "4",															// id
+		"id" : 4,																// id
 		"guid" : "werzqwerwqer",								// guid
 		"title" : "Titel",											// title
 		"description" : "Textinhalt",						// description
 		"prio" : "5",														// prio
 		"dateCreated" : "20160314231234",				// dateCreated
-		"dateFinished" : "20160314231245",			// dateFinished
-		"dueDate" : "20160314231255",						// dueDate
+		"dateFinished" : "20160511141255",			// dateFinished
+		"dueDate" : "20160514111055"						// dueDate
 	};
  
   // Send the data using post

@@ -9,28 +9,25 @@ $(document).ready(function () {
 			if (status == 'success'){
 				console.log(data);
 				
+
+				// filter
+				var filter = true;
+				var filterCriteria = "dateFinished";
+
+				var dataResult = data;
+				if (filter == true) {
+					dataResult = cas.fee.helper.filterArray(data,filterCriteria);
+				}
+
+				// sort
 				var sortCriteria = "dateFinished";
 				var sortOrder = true;
-				var filterCriteria = "dateFinished";
+				var sortType = 1;
 				
-				// sort data
-				var sort_by = function(field, reverse, primer){
-					 var key = function (x) {return primer ? primer(x[field]) : x[field]};
+				dataResult = cas.fee.helper.sortArray(dataResult,sortCriteria,sortOrder,sortType);
 
-					 return function (a,b) {
-						var A = key(a), B = key(b);
-						return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];                  
-					 }
-				}
-				data.sort(sort_by(sortCriteria,sortOrder,parseInt));
-
-				// filter data
-				var dataFiltered = $.grep(data, function(element, index){
-						return element[filterCriteria] != "";
-				});
-				
-				
-				var items = dataFiltered.map(function (item) {
+	
+				var items = dataResult.map(function (item) {
 					
 					var dateCreatedOut = item.dateCreated;
 					dateCreatedOut = moment(dateCreatedOut,"YYYYMMDDHHmmss").format("YYYY-MM-DD-HH-mm-ss");

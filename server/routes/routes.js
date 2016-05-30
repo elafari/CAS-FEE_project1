@@ -119,13 +119,19 @@ var ourAppRouter = function(app) {
 
 	app.post("/notebookUpdate", function(req, res) {
 		try {
-			if (helper.checkPostParams(req.body,true)) {
-				helper.updateNote(req.body);
-				
-				return res.send(helper.getNoteShelf());
+			var checkedID = helper.checkNotes(req.body.id);
+			if (checkedID != -1) {
+				if (helper.checkPostParams(req.body,true)) {
+					helper.updateNote(req.body);
+					
+					return res.send(helper.getNoteShelf());
 
+				} else {
+					return res.send({"status": "Fehler", "message": "Es fehlt mindestens ein Attribut zur Notiz!"});
+				}
 			} else {
-				return res.send({"status": "Fehler", "message": "Es fehlt mindestens ein Attribut zur Notiz!"});
+				helper.logger(helper.logLevel.error,"route get /notebookUpdate: Unbekannte ID");
+				return res.send({"status": "Fehler", "message": "Unbekannte ID"});
 			}
 		} catch(e) {
 			helper.logger(helper.logLevel.error,"route post /notebookUpdate: " + e);

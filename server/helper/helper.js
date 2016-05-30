@@ -106,10 +106,14 @@ var helper = {
 			note.description = noteAttrib.description;
 			note.prio = noteAttrib.prio;
 			
-			note.dateCreated = helper.getFormattedDate();			// = noteAttrib.datecreate;
-			note.dateFinished = helper.getFormattedDate();		// = noteAttrib.datefinished;
-			note.dueDate = helper.getFormattedDate();			// = noteAttrib.datetarget;
-			//
+			// for new and updated notes this date will be updated
+			note.dateCreated = noteAttrib.dateCreated;
+			
+			// could also be deleted with a blank entry
+			note.dateFinished = noteAttrib.dateFinished;
+			
+			// dueDate may be changed at any time
+			note.dueDate = noteAttrib.dueDate;
 	
 			return note;
 		} catch(e) {
@@ -147,9 +151,11 @@ var helper = {
 			helper.logger(helper.logLevel.info,"Update: noteID=" + noteID);
 			// delete note
 			var entryID = helper.checkNotes(noteID);
-			helper.deleteNote(entryID);
-			// add note with same noteid and updated data
-			helper.addNote(noteAttrib,true);
+			if (entryID != -1) {
+				helper.deleteNote(entryID);
+				// add note with same noteid and updated data
+				helper.addNote(noteAttrib,true);
+			}
 		} catch (e) {
 			helper.logger(helper.logLevel.error,"helper deleteNote: " + e);
 		}
