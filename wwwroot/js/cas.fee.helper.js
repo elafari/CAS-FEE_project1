@@ -18,7 +18,7 @@ cas.fee.helper = {
 	filterArray: function(data, filterCriteria) {
 		try {
 			var dataFiltered = $.grep(data, function(element, index){
-					return element[filterCriteria] != "0";
+				return element[filterCriteria] != "0";
 			});
 			return dataFiltered;
 		} catch(e) {
@@ -33,7 +33,7 @@ cas.fee.helper = {
 	* @param {Boolean} sortOrder true=asc, false=desc
   * @return {Object} Sorted array
   */	
-	sortArray: function(data,sortCriteria,sortOrder,sortType) {
+	sortArray: function(data,sortCriteria,sortOrder) {
 		try {
 			var sort_by = function(field, reverse, primer){
 				 var key = function (x) {return primer ? primer(x[field]) : x[field]};
