@@ -18,7 +18,7 @@ cas.fee.helper = {
 	filterArray: function(data, filterCriteria) {
 		try {
 			var dataFiltered = $.grep(data, function(element, index){
-					return element[filterCriteria] != "";
+					return element[filterCriteria] != "0";
 			});
 			return dataFiltered;
 		} catch(e) {
