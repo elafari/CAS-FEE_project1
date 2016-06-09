@@ -51,12 +51,12 @@ var ourAppRouter = function(app) {
 			helper.noteShelf = [];
 		}
 	});
-	
+
 	app.get("/notebook", function(req, res) {
-	
+
 		try {
 			var checkedID = helper.checkNotes(req.query.id);
-			
+
 			if (!req.query.id) {
 				return res.send({"status": "error", "message": "route get /notebook: Keine ID"});
 			} else if (checkedID == -1) {
@@ -67,9 +67,9 @@ var ourAppRouter = function(app) {
 		} catch(e) {
 			helper.logger(helper.logLevel.error,"route get /notebook: " + e);
 		}
-		
+
 	});
-	
+
 	app.get("/notebookall", function(req, res) {
 		
 		try {
@@ -147,6 +147,6 @@ var ourAppRouter = function(app) {
 		}
 	});
 	
-}
+};
 
 module.exports = ourAppRouter;

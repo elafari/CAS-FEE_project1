@@ -1,3 +1,5 @@
+'use strict';
+
 var data = [
     {
         "id": "01",
@@ -46,6 +48,114 @@ var data = [
     }
 ];
 
+
+/*
+ var notebookFactory = (function () {
+
+ /**
+ * Private
+ *
+ var privateInstance = null;
+
+ var privateObject = function () {
+ var self = this;
+
+ self.pageObjArray = [];
+
+ self.setPageObj = function (pageObj) {
+ };
+
+ self.getPageObjById = function (pageId) {
+ };
+ };
+
+ /**
+ * Public
+ *
+ var publicCreate = function () {
+ if (!privateInstance) {
+ privateInstance = new privateObject();
+ }
+ return privateInstance;
+ };
+
+ return {
+ create: publicCreate
+ };
+
+ })();
+
+ var nb = notebookFactory.create();
+ */
+
+var nb = (function () {
+
+    /********************
+     * Private
+     ********************/
+    var _persons = [
+        {id: '0001', name: 'meier', firstname: 'hans'},
+        {id: '0002', name: 'müller', firstname: 'peter'},
+        {id: '0003', name: 'koller', firstname: 'ruedi'}
+    ];
+
+    /********************
+     * Public
+     ********************/
+    /**
+     * Filter array by given filter criteria
+     * @param {Object} data Array which has to be filtered
+     * @param {String} filterCriteria Array attribute to filter
+     * @return {Object} Filtered array
+     */
+    var filterArray = function (data, filterCriteria) {
+        try {
+            var dataFiltered = $.grep(data, function (element, index) {
+                return element[filterCriteria] != "";
+            });
+            return dataFiltered;
+        } catch (e) {
+            return data;
+        }
+    };
+
+    /**
+     * Sort array by given sort criteria
+     * @param {Object} data Array which has to be sorted
+     * @param {String} sortCriteria Array attribute to sort by
+     * @param {Boolean} sortOrder true=asc, false=desc
+     * @return {Object} Sorted array
+     */
+    var sortArray = function (data, sortCriteria, sortOrder, sortType) {
+        try {
+            var sort_by = function (field, reverse, primer) {
+                var key = function (x) {
+                    return primer ? primer(x[field]) : x[field]
+                };
+
+                return function (a, b) {
+                    var A = key(a), B = key(b);
+                    return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1, 1][+!!reverse];
+                }
+            };
+            data.sort(sort_by(sortCriteria, sortOrder, parseInt));
+            return data;
+        } catch (e) {
+            return data;
+        }
+    };
+
+    /********************
+     * Public Interface
+     ********************/
+    return {
+        sortArray: sortArray,
+        filterArray: filterArray
+    }
+
+})();
+
+
 $(function () {
     /**
      * render handlebars template
@@ -59,7 +169,6 @@ $(function () {
      * prepare theme selection
      */
     var theme = localStorage.getItem('theme') || 'default';
-    console.log('theme', theme);
     var linkTag = $('[data-theme="true"]');
     var themePath = linkTag.attr('href');
     var themeBasePath = themePath.substr(0, themePath.lastIndexOf('/') + 1);
@@ -73,7 +182,6 @@ $(function () {
             var theme = e.target.value;
             localStorage.setItem('theme', theme);
             linkTag.attr('href', themeBasePath + theme + '.css');
-            console.log(themeBasePath + theme + '.css');
         })
         .val(theme)
         .trigger('change');

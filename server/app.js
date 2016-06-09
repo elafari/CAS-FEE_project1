@@ -32,4 +32,5 @@ var ourAppRouter = require("./routes/routes.js")(app);
 // Start server to listen..
 var server = app.listen(_port, function () {
 	helper.logger(helper.logLevel.info,"Server is listening on port: " + server.address().port);
-})
+    helper.loadNotes();
+});
