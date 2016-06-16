@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Notes - CAS-FEE Project 1</title>
+    <title>Notebook - CAS-FEE Project1</title>
     <link rel="stylesheet" href="./vendor/normalize.css">
+    <link rel="stylesheet" href="./vendor/remodal/remodal.css">
+    <link rel="stylesheet" href="./vendor/remodal/remodal-default-theme.css">
     <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" data-theme="true" href="./css/themes/_empty.css">
 
@@ -12,8 +14,8 @@
         {{#each this}}
         <div id="note-{{this.id}}">
             <span>
-                <input type="checkbox" id="finish_note-{{this.id}}">
-                <label for="finish_note-{{this.id}}">Finished</label>
+                <input type="checkbox" id="finish-{{this.id}}">
+                <label for="finish-{{this.id}}">Finished</label>
             </span>
             <span>
                 <span class="title">{{this.title}}</span>&nbsp;
@@ -21,17 +23,19 @@
                 <span class="desc">{{this.description}}</span><!-- @todo: Event-Handler expandDescription -->
             </span>
             <span>
-                <button>Edit</button>
+                <button id="edit-{{this.id}}">Edit</button>
             </span>
         </div>
         {{/each}}
     </script>
 </head>
 
+
 <body>
-<header>
+<header class="remodal-bg">
     <div>
         <button id="create">Create new Note</button>
+        <!--<a href="#" data-remodal-target="modal">Create new note</a>-->
         <select name="" id="select-theme">
             <option value="default">Default</option>
             <option value="black_white">Black&White</option>
@@ -47,50 +51,55 @@
                 <button id="by-prio">By priority</button>
             </nav>
         </div>
-        <div class=right">
+        <div class="right">
             <h1 class="right">Filter</h1>
             <button id="show-finished">Show Finished</button>
         </div>
     </div>
 </header>
 
-<main>
-    <div id="notes"></div><!-- @todo: Event-Handler setFinished and edit -->
+<main class="remodal-bg">
+    <div id="notes-container"></div><!-- @todo: Event-Handler setFinished and edit -->
 </main>
 
-<footer>
+<footer class="remodal-bg">
     <div class="table">
-        <div class="table-cell"><a href="https://github.com/elafari/CAS-FEE_project1">GitHub Repository</a></div>
+        <div class="table-cell"><a href="https://github.com/elafari/CAS-FEE_project1" target="_blank">GitHub Repository</a></div>
         <div class="table-cell right">Created by Tony&nbsp;Kammermeier and&nbsp;Rafael&nbsp;Bamert</div>
         <!--@todo: insert GitHub icon and links to our gitHub-pages-->
     </div>
 </footer>
-<!--
-<form id="edit-task-item">
-    <div>
-        <label for="title">Title</label>
-        <input type="text" id="title">
-    </div>
-    <div>
-        <label for="description">Beschreibung</label>
-        <input type="text" id="description">
-    </div>
-    <div>
-        <label for="prio">Wichtigkeit</label>
-        <input type="text" id="prio"><!-- @todo: Event handler: setPrio (color changes)-->
-<!--  </div>
-  <div>
-      <label for="due-date">Erledigt bis:</label>
-      <input type="date" id="due-date">
-  </div>
-  <div>
-      <button id="save">Speichern</button>
-      <button id="cancel">Cancel</button>
-  </div>
-</form>-->
+
+<!-- modal dialog with form -->
+<div data-remodal-id="modal">
+    <form id="create-note">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="text" id="description">
+        </div>
+        <div>
+            <label for="prio">Priority</label>
+            <input type="text" id="prio"><!-- @todo: Event handler: setPrio (color changes)-->
+        </div>
+        <div>
+            <label for="due-date">Due Date</label>
+            <input type="date" id="due-date">
+        </div>
+        <div>
+            <button id="save">Save</button>
+            <button id="cancel">Cancel</button>
+        </div>
+    </form>
+</div>
 
 <script src="./vendor/jquery-2.2.3.js"></script>
+<script src="./vendor/moment.js"></script>
 <script src="./vendor/handlebars-v4.0.5.js"></script>
+<script src="./vendor/remodal/remodal.min.js"></script>
 <script src="./js/custom.js"></script>
 
 </body>

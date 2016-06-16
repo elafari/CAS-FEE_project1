@@ -7,7 +7,7 @@ header {
 }
 
 
-#notes > div:hover {
+#notes-container > div:hover {
     background-color: lightgrey;
 }
 

@@ -1,0 +1,20 @@
+{
+    "nonew": true,
+    "jquery": true,
+    "curly": true,
+    "latedef": true,
+    "noarg": true,
+    "trailing": true,
+    "forin": true,
+    "noempty": true,
+    "quotmark": "single",
+    "maxparams": 4,
+    "eqeqeq": true,
+    "strict": false,
+    "bitwise": true,
+    "browser": true,
+    "freeze": true,
+    "camelcase": true,
+    "indent": 4,
+    "laxbreak": true
+}

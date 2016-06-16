@@ -78,17 +78,17 @@ main {
     border-width: 0 1px;
 }
 
-#notes {
+#notes-container {
     display: table;
     width: 100%;
     margin: 0 auto;
 
 }
-#notes > div {
+#notes-container > div {
     display: table-row;
 }
 
-#notes > div > span {
+#notes-container > div > span {
     display: table-cell;
     padding: 0.5em;
     vertical-align: middle;

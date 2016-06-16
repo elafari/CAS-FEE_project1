@@ -1,170 +1,128 @@
 'use strict';
 
-var data = [
-    {
-        "id": "01",
-        "title": "implement HTML",
-        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "prio": 3,
-        "dateCreated": "20161231235959",
-        "dateFinished": "20161231235959",
-        "dueDate": "20161231235959"
-    },
-    {
-        "id": "02",
-        "title": "implement CSS",
-        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "prio": 2
-    },
-    {
-        "id": "03",
-        "title": "implement JS frontend",
-        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "prio": 1
-    },
-    {
-        "id": "04",
-        "title": "implement JS backend",
-        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "prio": 0
-    },
-    {
-        "id": "05",
-        "title": "make music",
-        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "prio": 0
-    },
-    {
-        "id": "06",
-        "title": "jump around",
-        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "prio": 0
-    },
-    {
-        "id": "07",
-        "title": "go to sleep",
-        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-        "prio": 0
-    }
-];
-
-
-/*
- var notebookFactory = (function () {
-
- /**
- * Private
- *
- var privateInstance = null;
-
- var privateObject = function () {
- var self = this;
-
- self.pageObjArray = [];
-
- self.setPageObj = function (pageObj) {
- };
-
- self.getPageObjById = function (pageId) {
- };
- };
-
- /**
- * Public
- *
- var publicCreate = function () {
- if (!privateInstance) {
- privateInstance = new privateObject();
- }
- return privateInstance;
- };
-
- return {
- create: publicCreate
- };
-
- })();
-
- var nb = notebookFactory.create();
- */
-
 var nb = (function () {
 
     /********************
      * Private
      ********************/
-    var _persons = [
-        {id: '0001', name: 'meier', firstname: 'hans'},
-        {id: '0002', name: 'müller', firstname: 'peter'},
-        {id: '0003', name: 'koller', firstname: 'ruedi'}
-    ];
+    var privateNotes = [];
+    var privateSortCriteria = 'dateCreated';
+    var privateSortOrder = true; // ascending
+    var privateFilterCriteria = null;
 
-    /********************
-     * Public
-     ********************/
     /**
-     * Filter array by given filter criteria
-     * @param {Object} data Array which has to be filtered
-     * @param {String} filterCriteria Array attribute to filter
-     * @return {Object} Filtered array
+     * Sort array by given sort criteria
+     *
+     * @param  {Object}  data - Array which has to be sorted
+     * @param  {String}  criteria - Array attribute to sort by
+     * @param  {Boolean} order - true=asc, false=desc
+     * @return {Object}  Sorted array
      */
-    var filterArray = function (data, filterCriteria) {
+    var privateSortArray = function (data, criteria, order) {
         try {
-            var dataFiltered = $.grep(data, function (element, index) {
-                return element[filterCriteria] != "";
-            });
-            return dataFiltered;
+            var sortBy = function (field, reverse, primer) {
+                var key = function (x) {
+                    return primer ? primer(x[field]) : x[field];
+                };
+
+                return function (a, b) {
+                    var A = key(a);
+                    var B = key(b);
+                    return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1, 1][+!!reverse];
+                }
+            };
+
+            data.sort(sortBy(criteria, order, parseInt));
+            return data;
+
         } catch (e) {
+            // @todo: do something with e?
             return data;
         }
     };
 
     /**
-     * Sort array by given sort criteria
-     * @param {Object} data Array which has to be sorted
-     * @param {String} sortCriteria Array attribute to sort by
-     * @param {Boolean} sortOrder true=asc, false=desc
-     * @return {Object} Sorted array
+     * Filter array by given filter criteria
+     *
+     * @param  {Object} data - Array which has to be filtered
+     * @param  {String} criteria - Array attribute to filter
+     * @return {Object} Filtered array
      */
-    var sortArray = function (data, sortCriteria, sortOrder, sortType) {
+    var privateFilterArray = function (data, criteria) {
         try {
-            var sort_by = function (field, reverse, primer) {
-                var key = function (x) {
-                    return primer ? primer(x[field]) : x[field]
-                };
-
-                return function (a, b) {
-                    var A = key(a), B = key(b);
-                    return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1, 1][+!!reverse];
-                }
-            };
-            data.sort(sort_by(sortCriteria, sortOrder, parseInt));
-            return data;
+            var dataFiltered = $.grep(data, function (element) {
+                return element[criteria] !== 0; //@todo: only works for numbers
+            });
+            return dataFiltered;
         } catch (e) {
+            // @todo: do something with e?
             return data;
         }
+    };
+
+    /********************
+     * Public
+     ********************/
+    var publicLoadNotes = function () {
+
+        var url = 'http://localhost:4000/notebookall';
+
+        $.getJSON(url, function (data) {
+
+            // apply sorting
+            privateNotes = privateSortArray(data, privateSortCriteria, privateSortOrder);
+            // apply filter
+            // @todo: this could also be done by CSS
+            if (privateFilterCriteria) {
+                privateNotes = privateFilterArray(data, privateFilterCriteria);
+            }
+            // format dates
+            privateNotes = privateNotes.map(function (item) {
+                //var dateCreatedOut = moment(item.dateCreated, "YYYYMMDDHHmmss").format("YYYY-MM-DD-HH-mm-ss");
+                //var dueDateOut = moment(item.dueDate, "YYYYMMDDHHmmss").format("dddd-WW");
+                return item;
+            });
+
+            console.log('SUCCESS: data retrieved');
+        }).error(function (evt) {
+            console.log('ERROR while retrieving data', evt);
+        });
+
+    };
+
+    var sortNotes = function (criteria, order) {
+        nb.privateSortCriteria = criteria; // @todo: use object with this(=self) context
+        nb.privateSortOrder = order;
+
+        privateSortArray(privateNotes, privateSortCriteria, privateSortOrder);
+    };
+
+    var publicGetData = function () {
+        return privateNotes;
+    };
+
+    /**
+     * render handlebars template
+     */
+    var publicRenderTemplate = function (data) {
+        var template = Handlebars.compile($('#notes-template').html());
+        var notesHtml = template(data);
+        $('#notes-container').html(notesHtml);
     };
 
     /********************
      * Public Interface
      ********************/
     return {
-        sortArray: sortArray,
-        filterArray: filterArray
+        loadData        : publicLoadNotes,
+        getData         : publicGetData,
+        sort            : sortNotes,
+        renderTemplate  : publicRenderTemplate
     }
 
 })();
 
-
 $(function () {
-    /**
-     * render handlebars template
-     */
-    var template = Handlebars.compile($('#notes-template').html());
-    var notesHtml = template(data);
-    $('#notes').html(notesHtml);
-
-
     /**
      * prepare theme selection
      */
@@ -173,10 +131,23 @@ $(function () {
     var themePath = linkTag.attr('href');
     var themeBasePath = themePath.substr(0, themePath.lastIndexOf('/') + 1);
 
+
+    /**
+     * get data from server and render it
+     * //@todo: moving this after event handlers causes problems with async data loading!!
+     */
+    nb.loadData();
+
+    setTimeout(function() { //wait for async call to be complete
+        var data = nb.getData();
+        console.log('data', data);
+        nb.renderTemplate(data);
+    }, 0);
+
+
     /**
      * register event handlers
      */
-    // change theme
     $('#select-theme')
         .on('change', function (e) {
             var theme = e.target.value;
@@ -185,4 +156,65 @@ $(function () {
         })
         .val(theme)
         .trigger('change');
+
+    // instantiate modal
+    var modal = $('[data-remodal-id=modal]').remodal({
+        closeOnCancel: true
+    });
+
+    $('#create').click(function() {
+        modal.open();
+        //@todo: clear form
+    });
+
+    $('#save').on('click', function () {
+        console.log('Save button is clicked');
+    });
+
+    $('#cancel').on('click', function () {
+        console.log('Cancel button is clicked');
+        modal.close();
+    });
+
+
+    $('#notes-container').on('change', '[id^=finish-]', function (evt) {
+
+        console.log('finish-evt', evt);
+        var id = evt.target.id.split('-')[1];
+
+        // call server
+
+        $('#note-' + id).fadeOut('slow');
+    });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
