@@ -104,10 +104,7 @@ var ourAppRouter = function(app) {
 					if (req.body.getAll) {
 						return res.send(custom.getNoteShelf());
 					} else {
-						return res.send([{
-							"id": Number(noteAdded[0].id),
-							"dateCreated": noteAdded[0].dateCreated
-						}]);
+						return res.send(noteAdded);
 					}
 				} else {
 					return res.send({"status": "error", "message": "route post /notebook: At least one attribute is missing!"});
@@ -122,12 +119,11 @@ var ourAppRouter = function(app) {
 				custom.logger(custom.logLevel.info,"app.post: update");
 				if (custom.checkPostParams(req.body,true)) {
 					var noteUpdated = custom.updateNote(req.body);
-
 					// if flag getAll is set, then return whole note array
 					if (req.body.getAll) {
 						return res.send(custom.getNoteShelf());
 					} else {
-						return res.send([{"id": "" + noteUpdated}]);
+						return res.send(noteUpdated);
 					}
 				} else {
 					return res.send({"status": "error", "message": "route get /notebookUpdate: At least one attribute is missing!"});
@@ -155,13 +151,12 @@ var ourAppRouter = function(app) {
 				custom.logger(custom.logLevel.error,"route get /notebookDelete: unknown ID");
 				return res.send({"status": "error", "message": "route get /notebookDelete: unknown ID"});
 			} else {
-				custom.deleteNote(checkedID);
-
+				var noteDeleted = custom.deleteNote(checkedID);
 				// if flag getAll is set, then return whole note array
 				if (req.body.getAll) {
 					return res.send(custom.getNoteShelf());
 				} else {
-					return res.send([{"id": "" + req.body.id}]);
+					return res.send(noteDeleted);
 				}
 			}
 		} catch(e) {

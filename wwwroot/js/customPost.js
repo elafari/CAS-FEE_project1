@@ -27,7 +27,7 @@ $("#post-form").submit(function (event) {
     if (param2 == "2") {
         var noteArray = {
             "id": parseInt(param1),								// id
-            "title": "Title-changed",							// title
+            "title": "Title-changed2",							// title
             "prio": "4",										// prio
             "dueDate": "20170514111055",						// dueDate
         };

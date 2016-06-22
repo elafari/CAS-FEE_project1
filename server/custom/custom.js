@@ -46,7 +46,7 @@ var custom = {
 	logInfo : true,
 
   /**
-  * Check POST parameters
+  * Check POST parameters completeness
   * @param {Object} reqBody request body object
   * @param {Boolean} update update flag
   */
@@ -85,8 +85,8 @@ var custom = {
 			custom.saveNotes();
 			custom.logger(custom.logLevel.info,"Processed: noteCounter= " + note.id);
 
-			// return some note data
-			return [{"id": "" + note.id,"dateCreated": note.dateCreated}];
+			// return relevant note data
+			return [{"id": "" + Number(note.id),"dateCreated": note.dateCreated,"dateFinished": note.dateFinished}];
 
 		} catch(e) {
 			custom.logger(custom.logLevel.error,"custom addNote: " + e);
@@ -102,27 +102,30 @@ var custom = {
 
 			var note = {};
 
+			// fill note attributes depending of add/update
 			if (updateFlag == true) {
 				note.id = noteAttrib.id;
-				note.dateCreated = noteRemain.dateCreated;
+				note.dateCreated = noteRemain.dateCreated
+				if (noteAttrib.dateFinished) {
+					if (noteAttrib.dateFinished == "0") {
+						note.dateFinished = noteAttrib.dateFinished;
+					} else {
+						note.dateFinished = custom.getFormattedDate();
+					}
+				} else {
+					note.dateFinished = noteRemain.dateFinished;
+				}
 			} else {
 				custom.noteCounter = parseInt(custom.getNoteID()) + 1;
 				note.id = custom.noteCounter;
 				note.dateCreated = custom.getFormattedDate();
 			}
 
-			// note attributes
+			// fill other note attributes
 			note.guid = custom.createGUID();
-			custom.logger(custom.logLevel.info,"GUID: " + note.guid);
-
 			note.title = noteAttrib.title || noteRemain.title;
 			note.description = noteAttrib.description || noteRemain.description;
 			note.prio = noteAttrib.prio || noteRemain.prio;
-
-			// could also be deleted with a "0" entry
-			note.dateFinished = noteAttrib.dateFinished || noteRemain.dateFinished;
-
-			// dueDate may be changed at any time
 			note.dueDate = noteAttrib.dueDate || noteRemain.dueDate;
 
 			return note;
@@ -161,15 +164,15 @@ var custom = {
 		try {
 			var noteID = noteAttrib.id;
 			custom.logger(custom.logLevel.info,"Update: noteID=" + noteID);
-			// delete note
 			var entryID = custom.checkNotes(noteID);
 			if (entryID != -1) {
+				// delete note
 				var noteDeleted = custom.deleteNote(entryID);
 				// add note with same noteid and updated data
-				var note = custom.addNote(noteAttrib,true, noteDeleted);
+				var noteAdded = custom.addNote(noteAttrib,true, noteDeleted);
 
-				// return some note data
-				return [{"id": "" + noteID}];
+				// return relevant note data
+				return noteAdded;
 			}
 		} catch (e) {
 			custom.logger(custom.logLevel.error,"custom updateNote: " + e);
