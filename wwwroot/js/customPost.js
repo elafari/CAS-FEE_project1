@@ -8,28 +8,58 @@ $("#post-form").submit(function (event) {
 
     var url = $form.find("input[name='url']:checked").val();
     var param1 = $form.find("input[name='param1']").val();
+    var param2 = $form.find("input[name='param2']").val();
 
     console.log("url = " + url);
-    console.log("param1 = " + param1);
+    console.log("param1 = " + param1 + " | param2 = " + param2);
 
-    if (param1 == "") {
-        param1 = "0";
-    }
-
-    // Test: allways the same object...
-    var noteArray = {
-        "id": parseInt(param1),								// id
-        "guid": "werzqwerwqer",								// guid
-        "title": "Titel",											// title
-        "description": "Textinhalt",						// description
-        "prio": "5",														// prio
-        "dateCreated": "20160313231234",				// dateCreated
-        "dateFinished": "20160409111055",			// dateFinished
-        "dueDate": "20160514111055"						// dueDate
+    // Test: add note
+    if (param2 == "1") {
+        var noteArray = {
+            "title": "Title-added",									// title
+            "description": "Textinhalt-added",						// description
+            "prio": "5",										    // prio
+            "dueDate": "20160514111055",						    // dueDate
+            "getAll": ""
+        };
+    };
+    // Test: update some data
+    if (param2 == "2") {
+        var noteArray = {
+            "id": parseInt(param1),								// id
+            "title": "Title-changed",							// title
+            "prio": "4",										// prio
+            "dueDate": "20170514111055",						// dueDate
+        };
+    };
+    // Test: update dateFinished reset
+    if (param2 == "3") {
+        var noteArray = {
+            "id": parseInt(param1),								// id
+            "dateFinished": "0",					            // dateFinished
+        };
+    };
+    // Test: update dateFinished set
+    if (param2 == "4") {
+        var noteArray = {
+            "id": parseInt(param1),								// id
+            "dateFinished": "20170514111055",					// dateFinished
+        };
+    };
+    // Test: delete
+    if (param2 == "5") {
+        var noteArray = {
+            "id": parseInt(param1),								// id
+        };
     };
 
+
     // Send the data using post
-    var posting = $.post(url, noteArray);
+    try {
+        var posting = $.post(url, noteArray);
+    } catch(e){
+        console.log("post error: " + e);
+    }
 
     // Put the results in a div
     posting.done(function (data) {
@@ -37,16 +67,21 @@ $("#post-form").submit(function (event) {
         if (data.status == "error") {
             console.log("post response: " + data.status + " - " + data.message);
         } else {
-            var items = data.map(function (item) {
-                return item["id"] + ' | ' + item["guid"] + ' | ' + item["title"] + ' | ' + item["description"] + ' | ' + item["prio"] + ' | ' + item["dateCreated"] + ' | ' + item["dateFinished"] + ' | ' + item["dueDate"];
-            });
+            try {
+                console.log("response data: " + data);
+                var items = data.map(function (item) {
+                    return item["id"] + ' | ' + item["guid"] + ' | ' + item["title"] + ' | ' + item["description"] + ' | ' + item["prio"] + ' | ' + item["dateCreated"] + ' | ' + item["dateFinished"] + ' | ' + item["dueDate"];
+                });
 
-            $("#result").empty();
+                $("#result").empty();
 
-            if (items.length) {
-                var content = '<li>' + items.join('</li><li>') + '</li>';
-                var list = $('<ul />').html(content);
-                $("#result").append(list);
+                if (items.length) {
+                    var content = '<li>' + items.join('</li><li>') + '</li>';
+                    var list = $('<ul />').html(content);
+                    $("#result").append(list);
+                }
+            } catch(e) {
+                console.log("post response error: " + e)
             }
         }
 

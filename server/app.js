@@ -6,14 +6,14 @@
  *
  * @requires express
  * @requires body-parser
- * @requires helper/helper.js
+ * @requires custom/custom.js
  *
  */
  
 var express = require("express");
 var bodyParser = require("body-parser");
 
-var helper = require("./helper/helper.js");
+var custom = require("./custom/custom.js");
 
 var _port = 4000;
 
@@ -31,6 +31,6 @@ var ourAppRouter = require("./routes/routes.js")(app);
 
 // Start server to listen..
 var server = app.listen(_port, function () {
-	helper.logger(helper.logLevel.info,"Server is listening on port: " + server.address().port);
-    helper.loadNotes();
+	custom.logger(custom.logLevel.info,"Server is listening on port: " + server.address().port);
+    custom.loadNotes();
 });
