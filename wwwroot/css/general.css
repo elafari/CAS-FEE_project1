@@ -19,7 +19,9 @@ header, main, footer {
     padding: 1em;
 }
 
-/* @subsection helpers */
+/*
+ * @subsection helpers
+ */
 .right {
     text-align: right;
 }
@@ -114,4 +116,26 @@ footer {
 
 footer .table {
     width: 100%;
+}
+
+/**
+ * @section modal form
+ */
+.remodal-close {
+    left: initial;
+    right: 0;
+}
+form div:not(.controls) {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+form label {
+    display: inline-block;
+    width: 20%;
+    margin-right: 1rem;
+    text-align: right;
+}
+
+form input:not([type='date']), form textarea {
+    width: 75%;
 }

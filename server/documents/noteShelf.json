@@ -250,7 +250,7 @@
     "dueDate": "20160514111055"
   },
   {
-    "id": "8",
+    "id": 8,
     "guid": "865e28ca-ee40-47c4-a100-c6f92345732f",
     "title": "Titel",
     "description": "Textinhalt",
@@ -440,7 +440,7 @@
     "dueDate": "20160514111055"
   },
   {
-    "id": "48",
+    "id": 48,
     "dateCreated": "20160622021251",
     "guid": "2439e16c-b3fc-474d-bee3-dba249007bea",
     "title": "Title-changed",
@@ -480,7 +480,7 @@
     "dueDate": "20160514111055"
   },
   {
-    "id": "49",
+    "id": 49,
     "dateCreated": "20160622021251",
     "guid": "12e48f4f-c99a-4707-a1f4-3caa23b9320d",
     "title": "Title-changed",
@@ -490,7 +490,7 @@
     "dueDate": "20170514111055"
   },
   {
-    "id": "53",
+    "id": 53,
     "dateCreated": "20160622024333",
     "guid": "15f5a7f0-e4bb-4b45-935f-b8c2bf553465",
     "title": "Title-changed",
@@ -500,7 +500,7 @@
     "dueDate": "20170514111055"
   },
   {
-    "id": "2",
+    "id": 2,
     "dateCreated": "20160314231234",
     "guid": "ca27b871-d8d4-4f38-beab-73b022f9274d",
     "title": "Title-changed",

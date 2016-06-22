@@ -99,12 +99,15 @@ var ourAppRouter = function(app) {
 				// add note
 				if (custom.checkPostParams(req.body)) {
 					var noteAdded = custom.addNote(req.body);
-
+					console.log('noteAdded', noteAdded);
 					// if flag getAll is set, then return whole note array
 					if (req.body.getAll) {
 						return res.send(custom.getNoteShelf());
 					} else {
-						return res.send([{"id": "" + noteAdded}]);
+						return res.send([{
+							"id": Number(noteAdded[0].id),
+							"dateCreated": noteAdded[0].dateCreated
+						}]);
 					}
 				} else {
 					return res.send({"status": "error", "message": "route post /notebook: At least one attribute is missing!"});
