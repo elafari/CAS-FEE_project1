@@ -1,4 +1,3 @@
-
 /**
  * Main app for the note project.
  *
@@ -21,16 +20,16 @@ var app = express();
 
 // Use bodyParser to allow process POST requests
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Use static to provide static content
-app.use('/',express.static('../wwwroot'));
+app.use('/', express.static('../wwwroot'));
 
 // Define routes
 var ourAppRouter = require("./routes/routes.js")(app);
 
 // Start server to listen..
 var server = app.listen(_port, function () {
-	custom.logger(custom.logLevel.info,"Server is listening on port: " + server.address().port);
+    custom.logger(custom.logLevel.info, "Server is listening on port: " + server.address().port);
     custom.loadNotes();
 });

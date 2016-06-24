@@ -68,12 +68,14 @@ var nb = (function () {
     var privateGetFormData = function () {
         var form = $('#create-note');
         var formData = {
-            id          : form.find('#id').val(),
-            title       : form.find('#title').val(),
-            description : form.find('#description').val(),
-            prio        : form.find('#prio').val(),
-            dueDate     : form.find('#dueDate').val()
+            id: form.find('#id').val(),
+            title: form.find('#title').val(),
+            description: form.find('#description').val(),
+            prio: form.find('#prio').val(),
+            dueDate: form.find('#dueDate').val()
         };
+
+        formData.id = formData.id ? Number(formData.id) : null;
         formData.dueDate = privateConvertToServerDate(formData.dueDate);
 
         return formData;
@@ -84,10 +86,10 @@ var nb = (function () {
      *
      * @param  {String} id - property of entry to be removed
      */
-    var privateRemoveNote = function(id) {
-        privateNotes.some(function(val, idx){
-            if (val.id === Number(id)) {
-                privateNotes.splice(idx, 1);
+    var privateRemoveNote = function (id) {
+        privateNotes.some(function (val, idx, arr) {
+            if (val.id === id) {
+                arr.splice(idx, 1);
                 return true;
             }
         });
@@ -100,14 +102,14 @@ var nb = (function () {
         // format dates
         // @todo: check if this works with created and finish date
 
-        var data = privateNotes.map(function(dataItem) {
+        var data = privateNotes.map(function (dataItem) {
             var item = $.extend({}, dataItem); // we don't wanna change the original object and therefore make a copy //@todo: probably not the most elegant way to do this
             var dates = [
                 'dueDate',
                 'dateCreated',
                 'dateFinished'
             ];
-            dates.forEach(function(val){
+            dates.forEach(function (val) {
                 item[val] = privateConvertToViewDate(item[val]);
             });
             return item;
@@ -144,8 +146,8 @@ var nb = (function () {
      ********************/
     var publicLoadNotes = function () {
         var url = 'http://localhost:4000/notebookall';
-        $.getJSON(url)
-            .done(function (data) {
+        $.getJSON(url).done(function (data) {
+            if (data.status !== 'error') {
                 // apply sorting
                 privateNotes = privateSortArray(data, privateSortCriteria, privateSortOrder);
                 // apply filter
@@ -154,14 +156,13 @@ var nb = (function () {
                     privateNotes = privateFilterArray(data, privateFilterCriteria);
                 }
 
-
                 privateRenderTemplate();
 
-                //console.log('SUCCESS: data retrieved', data);
-            })
-            .error(function (evt) {
-                console.log('ERROR while retrieving data', evt); // @todo: message toast
-            });
+                console.log('SUCCESS: data retrieved', data); // @todo: message toast instead
+            } else {
+                console.log('ERROR while retrieving data', evt); // @todo: message toast instead
+            }
+        });
     };
 
     var publicGetData = function () {
@@ -169,23 +170,37 @@ var nb = (function () {
     };
 
     var publicCreate = function () {
-        var url = 'http://localhost:4000/notebook';
-        // @todo: does server create id, dataCreated and (empty) dateFinished?
+        var url = 'http://localhost:4000/notebook'; // @todo: make config
         var formData = privateGetFormData();
+        //formData.getAll = true; // force the server to put all notes in the response
 
-        $.post(url, formData)
-            .done(function (data) {
-                formData.id = Number(data[0].id);
-                formData.dateCreated = Number(data[0].dateCreated);
-                privateNotes.push(formData);
+        $.post(url, formData).done(function (data) {
+            if (data.status !== 'error') {
+                var action = data[0]._action;
+                var id = Number(data[0].id);
+                var createdDate = Number(data[0].dateCreated);
+
+                formData.id = id;
+                formData.dateCreated = createdDate;
+
+                if (action === 'updated') {
+                    privateNotes.some(function (val, idx, arr) {
+                        if (val.id === id) {
+                            arr.splice(idx, 1, formData);
+                            return true;
+                        }
+                    });
+                } else {
+                    privateNotes.push(formData);
+                }
+
                 privateRenderTemplate();
 
-                // message toast
-                console.log('SUCCESS: entry created', data);
-            })
-            .error(function (evt) {
-                console.log('ERROR while posting data', evt);
-            });
+                console.log('SUCCESS: entry created', data); // @todo: message toast instead
+            } else {
+                console.log('ERROR while posting data'); // @todo: message toast instead
+            }
+        });
     };
 
     var publicClearForm = function () {
@@ -199,7 +214,7 @@ var nb = (function () {
             '#dateFinished'
         ];
 
-        elements.forEach(function(selector) {
+        elements.forEach(function (selector) {
             form.find(selector).val('');
         });
     };
@@ -211,10 +226,10 @@ var nb = (function () {
         privateSortArray(privateNotes, privateSortCriteria, privateSortOrder);
     };
 
-    var publicSetFormValues = function(values) {
+    var publicSetFormValues = function (values) {
         var form = $('#create-note');
 
-        $.each(JSON.parse(values), function(key, val) {
+        $.each(JSON.parse(values), function (key, val) {
             console.log(key, val);
 
             if (privateDateFields.indexOf(key) > -1) {
@@ -226,27 +241,25 @@ var nb = (function () {
         });
     };
 
-    var publicDeleteNote = function(id) {
+    var publicDeleteNote = function (id) {
         var url = 'http://localhost:4000/notebookDelete';
         var formData = {id: id};
 
         //@todo: make private callDelete(requestBody)
-        $.post(url, formData)
-            .done(function (data) {
-
-                privateRemoveNote(id);
+        $.post(url, formData).done(function (data) {
+            if (data.status !== 'error') {
+                privateRemoveNote(data.id);
                 privateRenderTemplate();
 
-                // message toast
-                console.log('SUCCESS: entry deleted', data);
-            })
-            .error(function (evt) {
-                console.log('ERROR while posting data', evt);
-            });
+                console.log('SUCCESS: entry deleted', data); // @todo: message toast instead
+            } else {
+                console.log('ERROR while posting data', evt); // @todo: message toast instead
+            }
+        });
     };
 
     //@todo: delete this
-    var publicGetNotes = function(){
+    var publicGetNotes = function () {
         return privateNotes
     };
 
@@ -254,15 +267,15 @@ var nb = (function () {
      * Public Interface
      ********************/
     return {
-        loadData    : publicLoadNotes,
-        getData     : publicGetData,
-        sort        : sortNotes,
-        createNote  : publicCreate,
-        clearForm   : publicClearForm,
-        render      : privateRenderTemplate,
+        loadData: publicLoadNotes,
+        getData: publicGetData,
+        sort: sortNotes,
+        createNote: publicCreate,
+        clearForm: publicClearForm,
+        render: privateRenderTemplate,
         setFormValues: publicSetFormValues,
-        deleteNote  : publicDeleteNote,
-        _notes : publicGetNotes // @todo: delete this
+        deleteNote: publicDeleteNote,
+        _notes: publicGetNotes // @todo: delete this
     }
 
 })();
@@ -316,7 +329,7 @@ $(function () {
         var id = evt.target.id.split('-')[1];
         var formValues;
 
-        nb.getData().some(function(val) {
+        nb.getData().some(function (val) {
             if (val.id === Number(id)) {
                 formValues = JSON.stringify(val);
 
