@@ -62,7 +62,7 @@ h1 {
     font-size: 1.2rem;
     margin-top: 2rem;
 }
-.show-finished #by-finished {
+body:not(.show-finished) #by-finished {
     cursor: default;
     pointer-events: none;
     opacity: 0.5;

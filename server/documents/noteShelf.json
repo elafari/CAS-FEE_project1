@@ -2,191 +2,59 @@
   {
     "id": 5,
     "dateCreated": "20160314231234",
-    "dateFinished": "20160626153442",
-    "guid": "6caeb785-d63a-46e3-9198-78c484583fd0",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 4,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626154433",
-    "guid": "6dfb9c21-a91b-4b8a-b65d-e66bf0301749",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 7,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626154721",
-    "guid": "af7892ed-3b54-4ea0-9a72-f3e402bd7357",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 12,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626154802",
-    "guid": "a7ef61e7-d8f3-495a-b7e6-0cdd90e883e1",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 16,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626165044",
-    "guid": "a12a5036-465d-4df8-96de-edd8b57577b7",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 17,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626165134",
-    "guid": "9cec73b3-c2dd-461b-b928-4065c00a8f48",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 14,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626173358",
-    "guid": "ac4bb497-2302-43c9-b4b1-7aa432a4470b",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 19,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626174831",
-    "guid": "bedc29c8-95d8-4284-a63e-5d76c74feac8",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 9,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626161923",
-    "guid": "00ddc428-7a4d-433f-aea0-7bd1a14bc111",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "99",
-    "dueDate": "20160514000000"
-  },
-  {
-    "id": 21,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626222018",
-    "guid": "0637ce6b-b7f8-4c70-8441-4dfc8b1667b5",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "3",
-    "dueDate": "20160514000000"
-  },
-  {
-    "id": 22,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626222040",
-    "guid": "6450816c-8840-4ae5-9b84-a8d9258948bf",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "99",
-    "dueDate": "20160514000000"
-  },
-  {
-    "id": 20,
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160626222211",
-    "guid": "2b3629bc-9158-4721-b82e-6586d0ae7d24",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 48,
-    "dateCreated": "20160622021251",
-    "dateFinished": "0",
-    "guid": "7ec871f6-58fa-425d-8414-b7a72f0c18f4",
-    "title": "Title-changed",
-    "description": "Textinhalt-added",
-    "prio": "4",
-    "dueDate": "20170514111055"
-  },
-  {
-    "id": 47,
-    "dateCreated": "20160622021250",
-    "dateFinished": "0",
-    "guid": "50047536-94cc-4859-8b23-bc4ab5569642",
-    "title": "A Title",
-    "description": "Textinhalt-added",
-    "prio": "5",
-    "dueDate": "20160514000000"
-  },
-  {
-    "id": 15,
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "guid": "8d282d61-faa0-4ebb-835f-ec3cfd992946",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
+    "dateFinished": "20150602153442",
+    "guid": "da7179af-2851-40a9-9ff4-b99f0a04e668",
+    "title": "Katze füttern",
+    "description": "Blutwurst als Dessert besorgen",
+    "prio": "10",
+    "dueDate": "20160501000000"
   },
   {
     "id": 50,
     "dateCreated": "20160622022054",
-    "dateFinished": "0",
-    "guid": "3540bf4f-fcd6-4b37-ac70-cf2e28922172",
-    "title": "Title-added",
-    "description": "Textinhalt-added",
-    "prio": "5",
-    "dueDate": "20160514111055"
+    "dateFinished": "20160215232545",
+    "guid": "67ec20d7-17a3-4528-a14a-799d83efbc0d",
+    "title": "Notebook fertigstellen",
+    "description": "no comment",
+    "prio": "1",
+    "dueDate": "20160626000000"
   },
   {
-    "id": 49,
+    "id": 48,
     "dateCreated": "20160622021251",
-    "dateFinished": "0",
-    "guid": "f2348ad4-0730-4729-9de8-8f43943c73d7",
-    "title": "Title-changed",
-    "description": "Textinhalt-added",
+    "dateFinished": "20160620232552",
+    "guid": "941cc23e-3dd9-4675-bc8f-158d9ffcbcb1",
+    "title": "Marathon in 3h laufen",
+    "description": "..lol...",
     "prio": "4",
-    "dueDate": "20170514111055"
+    "dueDate": "20170529000000"
   },
   {
-    "id": 2,
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "guid": "151cf27e-1971-41ee-ad7f-6ce8ad00eb45",
-    "title": "Title-changed",
-    "description": "Textinhalt",
-    "prio": "4",
-    "dueDate": "20170514111055"
+    "id": 52,
+    "dateCreated": "20160626235209",
+    "guid": "31476ed4-7a15-49b6-92a6-02e7fb79c709",
+    "title": "Initial Entry",
+    "description": "just a test",
+    "prio": "99",
+    "dueDate": "20160630000000"
   },
   {
-    "id": 18,
+    "id": 53,
+    "dateCreated": "20160626235254",
+    "guid": "e943fc01-0f4c-46c6-aa59-44a254781914",
+    "title": "Second try",
+    "description": "..updated",
+    "prio": "98",
+    "dueDate": "20160601000000"
+  },
+  {
+    "id": 12,
     "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "guid": "a66e5100-a370-4230-94b4-91cb29eb62ff",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dueDate": "20160514111055"
+    "dateFinished": "20160101154802",
+    "guid": "2167947a-0fe8-4010-b710-503fafb487fc",
+    "title": "Windeln wechseln",
+    "description": "lorem ipsum..updated",
+    "prio": "20",
+    "dueDate": "20160510000000"
   }
 ]

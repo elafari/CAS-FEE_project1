@@ -7,7 +7,6 @@ var nb = (function () {
     var privateNotes = [];
     var privateSortCriteria = 'dateCreated';
     var privateSortOrder = false; // ascending
-    var privateFilterCriteria = null;
 
     var privateDateFields = [
         'dueDate',
@@ -41,26 +40,7 @@ var nb = (function () {
             return data;
 
         } catch (e) {
-            // @todo: do something with e?
-            return data;
-        }
-    };
-
-    /**
-     * Filter array by given filter criteria
-     *
-     * @param  {Object} data - Array which has to be filtered
-     * @param  {String} criteria - Array attribute to filter
-     * @return {Object} Filtered array
-     */
-    var privateFilterArray = function (data, criteria) {
-        try {
-            var dataFiltered = $.grep(data, function (element) {
-                return element[criteria] !== 0; //@todo: only works for numbers
-            });
-            return dataFiltered;
-        } catch (e) {
-            // @todo: do something with e?
+            // @todo: do something here
             return data;
         }
     };
@@ -110,7 +90,7 @@ var nb = (function () {
     var privateRenderTemplate = function () {
         var data = privateNotes.map(function (dataItem) {
             // format dates
-            var item = $.extend({}, dataItem); // we don't wanna change the original object and therefore make a copy //@todo: probably not the most elegant way to do this
+            var item = $.extend({}, dataItem); // we don't wanna change the original object and therefore make a copy //@todo: this is probably not the most elegant way to do this
             var dates = [
                 'dueDate',
                 'dateCreated',
@@ -156,21 +136,14 @@ var nb = (function () {
     /********************
      * Public
      ********************/
-    var publicLoadNotes = function () {
+    var publicLoadData = function () {
         var url = 'http://localhost:4000/notebookall';
         $.getJSON(url).done(function (data) {
             if (data.status !== 'error') {
-                // apply sorting
                 privateNotes = privateSortArray(data, privateSortCriteria, privateSortOrder);
-                // apply filter
-                // @todo: this could also be done by CSS
-                if (privateFilterCriteria) {
-                    privateNotes = privateFilterArray(data, privateFilterCriteria);
-                }
-
                 privateRenderTemplate();
 
-                //console.log('SUCCESS: data retrieved', data); // @todo: message toast instead
+                console.log('SUCCESS: data retrieved', data); // @todo: message toast instead
             } else {
                 console.log('ERROR while retrieving data', evt); // @todo: message toast instead
             }
@@ -181,8 +154,8 @@ var nb = (function () {
         return privateNotes;
     };
 
-    var publicCreate = function () {
-        var url = 'http://localhost:4000/notebook'; // @todo: make config
+    var publicSave = function () {
+        var url = 'http://localhost:4000/notebook';
         var formData = privateGetFormData();
         //formData.getAll = true; // force the server to put all notes in the response
 
@@ -190,10 +163,12 @@ var nb = (function () {
             if (data.status !== 'error') {
                 var action = data[0]._action;
                 var id = Number(data[0].id);
-                var createdDate = Number(data[0].dateCreated);
+                var createdDate = data[0].dateCreated;
+                var finishedDate = data[0].dateFinished;
 
                 formData.id = id;
                 formData.dateCreated = createdDate;
+                formData.dateFinished = finishedDate;
 
                 if (action === 'updated') {
                     privateNotes.some(function (val, idx, arr) {
@@ -204,6 +179,13 @@ var nb = (function () {
                     });
                 } else {
                     privateNotes.push(formData);
+
+                    var body = $('body');
+                    if (body.hasClass('show-finished')) {
+                        $('#show-finished').trigger('click');
+
+                        //body.removeClass('show-finished');
+                    }
                 }
 
                 privateRenderTemplate();
@@ -260,7 +242,7 @@ var nb = (function () {
         });
     };
 
-    var publicDeleteNote = function (id) {
+    var publicDelete = function (id) {
         var url = 'http://localhost:4000/notebookDelete';
         var formData = {id: id};
 
@@ -278,7 +260,7 @@ var nb = (function () {
     };
 
     var publicSetFinished = function(id, isChecked){
-        var url = 'http://localhost:4000/notebook'; // @todo: make config
+        var url = 'http://localhost:4000/notebook';
         var dateFinished = isChecked ? 'set' : '0';
         var formData = {
             id          : id,
@@ -308,31 +290,21 @@ var nb = (function () {
         });
     };
 
-    //@todo: delete this
-    var publicGetNotes = function () {
-        return privateNotes;
-    };
-    var publicGetStates = function () {
-        return privateSortCriteria + ', ' + privateSortOrder;
-    };
-
     /********************
      * Public Interface
      ********************/
     return {
-        loadData: publicLoadNotes,
-        getData: publicGetData,
-        sort: publicSortNotes,
-        createNote: publicCreate,
-        clearForm: publicClearForm,
-        render: privateRenderTemplate,
-        setFormValues: publicSetFormValues,
-        deleteNote: publicDeleteNote,
-        setFinished: publicSetFinished,
+        loadData    : publicLoadData,
+        saveNote    : publicSave,
+        setFinished : publicSetFinished,
+        deleteNote  : publicDelete,
 
-        _states: publicGetStates,
-        _notes: publicGetNotes, // @todo: delete this
-    };
+        getData     : publicGetData,
+        sort        : publicSortNotes,
+        clearForm   : publicClearForm,
+        render      : privateRenderTemplate,
+        setFormValues: publicSetFormValues
+    }; //@todo: move registration of event handlers to public init-method, so that less methods need to be exposed
 
 })();
 
@@ -364,7 +336,7 @@ $(function () {
     });
 
     $(document).on('confirmation', '.remodal', function () {
-        nb.createNote();
+        nb.saveNote();
     });
 
     $(document).on('closed', '.remodal', function () {
