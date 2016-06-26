@@ -6,7 +6,7 @@ var nb = (function () {
      ********************/
     var privateNotes = [];
     var privateSortCriteria = 'dateCreated';
-    var privateSortOrder = true; // ascending
+    var privateSortOrder = false; // ascending
     var privateFilterCriteria = null;
 
     var privateDateFields = [
@@ -231,11 +231,18 @@ var nb = (function () {
         });
     };
 
-    var sortNotes = function (criteria, order) {
-        nb.privateSortCriteria = criteria; // @todo: use object with this(=self) context
-        nb.privateSortOrder = order;
+    var publicSortNotes = function (criteria) {
+        //privateSortOrder = privateSortOrder || true; //true=asc
 
-        privateSortArray(privateNotes, privateSortCriteria, privateSortOrder);
+        // save states
+        if (criteria === privateSortCriteria){
+            privateSortOrder = !privateSortOrder;
+        } else {
+            privateSortOrder = true; //true = ascending
+        }
+        privateSortCriteria = criteria;
+
+        privateNotes = privateSortArray(privateNotes, privateSortCriteria, privateSortOrder);
     };
 
     var publicSetFormValues = function (values) {
@@ -286,7 +293,6 @@ var nb = (function () {
 
                 privateSetFinished(id, dateFinished);
 
-                //$('#note-' + id).fadeOut('slow');
                 row.css('color', 'green');
 
                 if (isChecked) {
@@ -306,6 +312,9 @@ var nb = (function () {
     var publicGetNotes = function () {
         return privateNotes;
     };
+    var publicGetStates = function () {
+        return privateSortCriteria + ', ' + privateSortOrder;
+    };
 
     /********************
      * Public Interface
@@ -313,14 +322,16 @@ var nb = (function () {
     return {
         loadData: publicLoadNotes,
         getData: publicGetData,
-        sort: sortNotes,
+        sort: publicSortNotes,
         createNote: publicCreate,
         clearForm: publicClearForm,
         render: privateRenderTemplate,
         setFormValues: publicSetFormValues,
         deleteNote: publicDeleteNote,
         setFinished: publicSetFinished,
-        _notes: publicGetNotes // @todo: delete this
+
+        _states: publicGetStates,
+        _notes: publicGetNotes, // @todo: delete this
     };
 
 })();
@@ -393,15 +404,27 @@ $(function () {
     });
 
     $('#show-finished').on('click', function (e) {
-        var notesContainer = $('#notes-container');
+        var container = $('body');
 
-        if (notesContainer.hasClass('show-finished')) {
-            notesContainer.removeClass('show-finished');
+        if (container.hasClass('show-finished')) {
+            container.removeClass('show-finished');
             $(e.target).text('Show Finished');
         } else {
-            notesContainer.addClass('show-finished');
+            container.addClass('show-finished');
             $(e.target).text('Show Pending');
         }
+    });
+
+    $('.sort-btn').on('click', function(e){
+        var target = $(e.target);
+        var field  = target.data('sort');
+        var button = target[0];
+
+        nb.sort(field);
+        nb.render();
+
+        $('.sort-btn').css('font-weight', 'normal');
+        $(button).css('font-weight', 'bold'); // @todo: add icon that indicates sort order
     });
 
     /**

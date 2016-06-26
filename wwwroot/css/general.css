@@ -15,6 +15,9 @@ header, main, footer {
     border: 1px solid grey;
     padding: 1em;
 }
+button, select {
+    cursor: pointer;
+}
 
 
 /*
@@ -59,6 +62,11 @@ h1 {
     font-size: 1.2rem;
     margin-top: 2rem;
 }
+.show-finished #by-finished {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.5;
+}
 #show-finished {
     float:right;
 }
@@ -83,10 +91,10 @@ main {
 #notes-container > div {
     display: table-row;
 }
-#notes-container:not(.show-finished) > div.finished{
+body:not(.show-finished) #notes-container > div.finished{
     display: none;
 }
-#notes-container.show-finished > div:not(.finished){
+body.show-finished #notes-container > div:not(.finished){
     display: none;
 }
 #notes-container > div > span {
