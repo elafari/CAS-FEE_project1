@@ -12,9 +12,15 @@
     <!-- handlebars template -->
     <script id="notes-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div id="note-{{this.id}}">
+        <div id="note-{{this.id}}"
+            {{#if this._isFinished}}
+                class="finished"
+            {{/if}}>
             <span>
-                <input type="checkbox" id="finish-{{this.id}}">
+                <input type="checkbox" id="finish-{{this.id}}"
+                    {{#if this._isFinished}}
+                        checked="checked"
+                    {{/if}}>
                 <label for="finish-{{this.id}}">Finished</label>
             </span>
             <span>
@@ -67,7 +73,7 @@
 </header>
 
 <main class="remodal-bg">
-    <div id="notes-container"></div><!-- @todo: Event-Handler setFinished and edit -->
+    <div id="notes-container"></div>
 </main>
 
 <footer class="remodal-bg">
@@ -91,7 +97,7 @@
         </div>
         <div>
             <label for="prio">Priority</label>
-            <input type="text" id="prio"><!-- @todo: Event handler: setPrio (color changes)-->
+            <input type="text" id="prio">
         </div>
         <div>
             <label for="dueDate">Due Date</label>

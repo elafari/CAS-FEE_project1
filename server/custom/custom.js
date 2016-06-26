@@ -173,7 +173,6 @@ var custom = {
 
             if (entryID !== -1) {
                 // delete note
-
                 var noteDeleted = custom.deleteNote(entryID);
 
                 // add note with same noteid and updated data
@@ -352,9 +351,8 @@ var custom = {
                 console.log(level + text);
             }
         } else if (custom.logTarget == "D") {			// database
-            // todo
+            // @todo
         }
-
     },
 
     /**

@@ -76,7 +76,7 @@ var ourAppRouter = function (app) {
         }
     });
     /**
-     * Route to get all note.
+     * Route to get all notes.
      */
     app.get("/notebookall", function (req, res) {
         try {
@@ -90,6 +90,8 @@ var ourAppRouter = function (app) {
      * Route posting data to add or update notes.
      */
     app.post("/notebook", function (req, res) {
+        var checkedID = null;
+        
         try {
             if (!req.body.id) {
                 custom.logger(custom.logLevel.info, "app.post: add");
@@ -110,7 +112,7 @@ var ourAppRouter = function (app) {
                 }
             } else {
                 req.body.id = Number(req.body.id); // numbers are always received as strings (HTTP)
-                var checkedID = custom.checkNotes(req.body.id);
+                checkedID = custom.checkNotes(req.body.id);
             }
 
             if (checkedID === -1) {

@@ -1,175 +1,5 @@
 [
   {
-    "id": 1,
-    "guid": "48625d3c-c2e1-46cb-a975-86e87c2781f0",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160511141255",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 4,
-    "guid": "20786294-65f2-4688-8909-d61008e45dba",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160511141255",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 5,
-    "guid": "7b7c3ca3-578a-430b-971e-4962e62c7651",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160511141255",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 7,
-    "guid": "bb44124e-de9e-478c-ab94-5cc140cba979",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160511141255",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 9,
-    "guid": "fc9eede3-f211-4070-88b2-74158269e77c",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160512141255",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 12,
-    "guid": "1d154d68-36e0-4e54-92ed-b9b2553b5efc",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160513141255",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 14,
-    "guid": "88034a16-ffc3-405a-92cf-60f1bb833c62",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 15,
-    "guid": "15f18148-fd92-43e4-8ff6-379128b00e86",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 16,
-    "guid": "f4046159-34a7-4ff9-abd4-fa43dd1b51ce",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 17,
-    "guid": "6772650e-f7e5-4a3f-a895-fdb42a857264",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 18,
-    "guid": "a2c2e350-b23a-4d35-b8fa-a5ab3c03dae0",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 19,
-    "guid": "63e8089d-e7c6-4438-89cd-2c39f7f521fc",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 20,
-    "guid": "22cb3212-a240-4191-ad78-5b8757d418db",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 21,
-    "guid": "213d14d0-8112-4fae-844d-efd3527e5852",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160414111055",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 22,
-    "guid": "3ea82087-1ed2-4507-b620-eab9b866a749",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160414111055",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 23,
-    "guid": "6f1d3beb-6834-4631-aa96-7a667876618f",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160314231234",
-    "dateFinished": "20160414111055",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 45,
-    "guid": "c1be3cb9-3887-40a3-8f1d-b10f114f5afe",
-    "title": "Titel",
-    "description": "Textinhalt",
-    "prio": "5",
-    "dateCreated": "20160313231234",
-    "dateFinished": "20160409111055",
-    "dueDate": "20160514111055"
-  },
-  {
     "id": 47,
     "dateCreated": "20160622021250",
     "guid": "6164bcce-e8f7-41ed-a767-af732445c2fc",
@@ -200,26 +30,6 @@
     "dueDate": "20160514111055"
   },
   {
-    "id": 51,
-    "dateCreated": "20160622022130",
-    "guid": "8f3d76b8-a804-44d9-94e0-21eef0e87809",
-    "title": "Title-added",
-    "description": "Textinhalt-added",
-    "prio": "5",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
-    "id": 52,
-    "dateCreated": "20160622022136",
-    "guid": "5869c3df-7c5c-4eb1-8a66-4b84facdaf35",
-    "title": "Title-added",
-    "description": "Textinhalt-added",
-    "prio": "5",
-    "dateFinished": "0",
-    "dueDate": "20160514111055"
-  },
-  {
     "id": 49,
     "dateCreated": "20160622021251",
     "guid": "12e48f4f-c99a-4707-a1f4-3caa23b9320d",
@@ -230,42 +40,173 @@
     "dueDate": "20170514111055"
   },
   {
-    "id": 53,
-    "dateCreated": "20160622024333",
-    "guid": "15f5a7f0-e4bb-4b45-935f-b8c2bf553465",
-    "title": "Title-changed",
+    "id": 5,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626153442",
+    "guid": "6caeb785-d63a-46e3-9198-78c484583fd0",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 4,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626154433",
+    "guid": "6dfb9c21-a91b-4b8a-b65d-e66bf0301749",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 7,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626154721",
+    "guid": "af7892ed-3b54-4ea0-9a72-f3e402bd7357",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 12,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626154802",
+    "guid": "a7ef61e7-d8f3-495a-b7e6-0cdd90e883e1",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 15,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626155021",
+    "guid": "94d20a71-b3ae-40c1-bf93-c2a289d29033",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 9,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626161923",
+    "guid": "74e411c0-d5f6-4116-b592-8b1ca22d96e8",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 51,
+    "dateCreated": "20160622022130",
+    "dateFinished": "20160626162304",
+    "guid": "c1c99343-3769-4232-a762-a7eb896e5a1d",
+    "title": "Title-added",
     "description": "Textinhalt-added",
-    "prio": "4",
-    "dateFinished": "0",
-    "dueDate": "20170514111055"
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 16,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626165044",
+    "guid": "a12a5036-465d-4df8-96de-edd8b57577b7",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 18,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626165131",
+    "guid": "7f6a171d-719e-4673-95c7-34a27cfb896a",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 17,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626165134",
+    "guid": "9cec73b3-c2dd-461b-b928-4065c00a8f48",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 14,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626173358",
+    "guid": "ac4bb497-2302-43c9-b4b1-7aa432a4470b",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 20,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626174538",
+    "guid": "1d5081ea-a7b0-4a5e-9ccb-689d9efb1831",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 19,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626174831",
+    "guid": "bedc29c8-95d8-4284-a63e-5d76c74feac8",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
+  },
+  {
+    "id": 23,
+    "dateCreated": "20160314231234",
+    "dateFinished": "20160626174832",
+    "guid": "9aadbfb8-8eaa-4a2c-8130-0ce8cd672015",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
   },
   {
     "id": 2,
     "dateCreated": "20160314231234",
-    "guid": "ca27b871-d8d4-4f38-beab-73b022f9274d",
+    "dateFinished": "20160626174832",
+    "guid": "f154b61c-f72c-4f03-8d06-343adfbb719e",
     "title": "Title-changed",
     "description": "Textinhalt",
     "prio": "4",
-    "dateFinished": "20170514111055",
     "dueDate": "20170514111055"
   },
   {
-    "id": 54,
-    "dateCreated": "20160622223143",
-    "dateFinished": "20160622223601",
-    "guid": "3d745c60-e697-4f31-8c5b-1bff36ec28ad",
-    "title": "Title-changed2",
-    "description": "Textinhalt-added",
-    "prio": "4",
-    "dueDate": "20170514111055"
+    "id": 21,
+    "dateCreated": "20160314231234",
+    "dateFinished": "0",
+    "guid": "68ac119e-8e9f-43b1-acab-a2b70737683b",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
   },
   {
-    "id": 55,
-    "dateCreated": "20160622224025",
-    "guid": "139723f3-7ecd-4742-80c7-a9400f8ce7ee",
-    "title": "Title-changed2",
-    "description": "Textinhalt-added",
-    "prio": "4",
-    "dueDate": "20170514111055"
+    "id": 22,
+    "dateCreated": "20160314231234",
+    "dateFinished": "0",
+    "guid": "ccc12286-01dc-44c3-af9e-cabc86fd6c88",
+    "title": "Titel",
+    "description": "Textinhalt",
+    "prio": "5",
+    "dueDate": "20160514111055"
   }
 ]

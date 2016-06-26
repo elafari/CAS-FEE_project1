@@ -34,7 +34,7 @@ var nb = (function () {
                     var A = key(a);
                     var B = key(b);
                     return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1, 1][+!!reverse];
-                }
+                };
             };
 
             data.sort(sortBy(criteria, order, parseInt));
@@ -81,6 +81,15 @@ var nb = (function () {
         return formData;
     };
 
+    var privateSetFinished = function(id, finishedDate) {
+        privateNotes.some(function (val, idx, arr) {
+            if (val.id === id) {
+                arr[idx].dateFinished = finishedDate;
+                return true;
+            }
+        });
+    };
+
     /**
      * Remove deleted entry from local data
      *
@@ -99,10 +108,8 @@ var nb = (function () {
      * render handlebars template
      */
     var privateRenderTemplate = function () {
-        // format dates
-        // @todo: check if this works with created and finish date
-
         var data = privateNotes.map(function (dataItem) {
+            // format dates
             var item = $.extend({}, dataItem); // we don't wanna change the original object and therefore make a copy //@todo: probably not the most elegant way to do this
             var dates = [
                 'dueDate',
@@ -112,6 +119,11 @@ var nb = (function () {
             dates.forEach(function (val) {
                 item[val] = privateConvertToViewDate(item[val]);
             });
+
+            // add finished flag
+            if (Number(dataItem.dateFinished) > 0) {
+                item._isFinished = true;
+            }
             return item;
         });
 
@@ -158,7 +170,7 @@ var nb = (function () {
 
                 privateRenderTemplate();
 
-                console.log('SUCCESS: data retrieved', data); // @todo: message toast instead
+                //console.log('SUCCESS: data retrieved', data); // @todo: message toast instead
             } else {
                 console.log('ERROR while retrieving data', evt); // @todo: message toast instead
             }
@@ -258,9 +270,41 @@ var nb = (function () {
         });
     };
 
+    var publicSetFinished = function(id, isChecked){
+        var url = 'http://localhost:4000/notebook'; // @todo: make config
+        var dateFinished = isChecked ? 'set' : '0';
+        var formData = {
+            id          : id,
+            dateFinished: dateFinished
+        };
+
+        $.post(url, formData).done(function (data) {
+            if (data.status !== 'error') {
+                var id = Number(data[0].id);
+                var dateFinished = Number(data[0].dateFinished);
+                var row = $('#note-' + id);
+
+                privateSetFinished(id, dateFinished);
+
+                //$('#note-' + id).fadeOut('slow');
+                row.css('color', 'green');
+
+                if (isChecked) {
+                    row.addClass('finished');
+                } else {
+                    row.removeClass('finished');
+                }
+
+                console.log('SUCCESS: finished date set', data); // @todo: message toast instead
+            } else {
+                console.log('ERROR while posting data'); // @todo: message toast instead
+            }
+        });
+    };
+
     //@todo: delete this
     var publicGetNotes = function () {
-        return privateNotes
+        return privateNotes;
     };
 
     /********************
@@ -275,8 +319,9 @@ var nb = (function () {
         render: privateRenderTemplate,
         setFormValues: publicSetFormValues,
         deleteNote: publicDeleteNote,
+        setFinished: publicSetFinished,
         _notes: publicGetNotes // @todo: delete this
-    }
+    };
 
 })();
 
@@ -315,16 +360,14 @@ $(function () {
         nb.clearForm();
     });
 
-
     $('#notes-container').on('change', '[id^=finish-]', function (evt) {
         console.log('finish-evt', evt);
-
         var id = evt.target.id.split('-')[1];
+        var isChecked = evt.target.checked;
 
-        // @todo: call server to set flag
-        $('#note-' + id).fadeOut('slow');
-
-    }).on('click', '[id^=edit-]', function (evt) {
+        nb.setFinished(id, isChecked);
+    })
+    .on('click', '[id^=edit-]', function (evt) {
         console.log('edit-evt', evt);
         var id = evt.target.id.split('-')[1];
         var formValues;
@@ -341,16 +384,24 @@ $(function () {
         // open form
         var modalObj = $('[data-remodal-id=modal]').remodal();
         modalObj.open();
-    }).on('click', '[id^=delete-]', function (evt) {
+    })
+    .on('click', '[id^=delete-]', function (evt) {
         console.log('delete-evt', evt);
         var id = evt.target.id.split('-')[1];
 
         nb.deleteNote(id);
     });
 
-    $('#show-finished').on('click', function () {
-        // @todo: make toggleable
+    $('#show-finished').on('click', function (e) {
+        var notesContainer = $('#notes-container');
 
+        if (notesContainer.hasClass('show-finished')) {
+            notesContainer.removeClass('show-finished');
+            $(e.target).text('Show Finished');
+        } else {
+            notesContainer.addClass('show-finished');
+            $(e.target).text('Show Pending');
+        }
     });
 
     /**
